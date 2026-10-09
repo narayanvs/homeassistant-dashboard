@@ -5,20 +5,17 @@ button-card, ApexCharts and a set of bespoke custom cards (energy flow, room
 consoles, weather, EV, speedtest, appliance cycles). Shared publicly as a
 reference/example.
 
-## Screenshots
-
-| | | |
-|:---:|:---:|:---:|
-| ![Home](screenshots/IMG_3209.PNG) | ![Energy flow](screenshots/IMG_3212.PNG) | ![Energy
-statistics](screenshots/IMG_3231.PNG) |
-| ![Home (balanced)](screenshots/IMG_3210.PNG) | ![Home (snow)](screenshots/IMG_3206.PNG) | ![Home
-lab](screenshots/IMG_3214.PNG) |
-| ![Home (rain)](screenshots/IMG_3230.PNG) | ![Power metrics](screenshots/IMG_3232.PNG) | ![Battery
-health](screenshots/IMG_3213.PNG) |
-
 > **Sanitized for public sharing.** All personal data has been removed or
 > replaced with placeholders (see **Sanitization** below). You will need to
 > adapt entity IDs, areas and resource paths to your own setup.
+
+## Screenshots
+
+| Home | Energy flow | Energy statistics |
+|:---:|:---:|:---:|
+| ![Home](screenshots/IMG_3209.PNG) | ![Energy flow](screenshots/IMG_3212.PNG) | ![Energy statistics](screenshots/IMG_3231.PNG) |
+| ![Home balanced](screenshots/IMG_3210.PNG) | ![Home snow](screenshots/IMG_3206.PNG) | ![Home lab](screenshots/IMG_3214.PNG) |
+| ![Home rain](screenshots/IMG_3230.PNG) | ![Power metrics](screenshots/IMG_3232.PNG) | ![Battery health](screenshots/IMG_3213.PNG) |
 
 ## Structure
 
