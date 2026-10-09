@@ -1,0 +1,36 @@
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+Icon?
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-*
+
+# Logs / temp
+*.log
+*.tmp
+*.bak
+*.orig
+
+# Archives (don't commit packaged exports)
+*.tgz
+*.tar.gz
+*.zip
+
+# Internal export artifacts (not part of the dashboard)
+_export_report.json

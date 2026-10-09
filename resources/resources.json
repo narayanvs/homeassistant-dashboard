@@ -1,0 +1,301 @@
+[
+  {
+    "type": "module",
+    "url": "/hacsfiles/LG-WebOS-Remote-Control/lg-remote-control.js?hacstag=257005990204"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375523"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/Bubble-Card/bubble-card.js?hacstag=680112919341"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/button-card/button-card.js?hacstag=146194325701"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/hass-swipe-navigation/swipe-navigation.js?hacstag=5017254791161"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/kiosk-mode/kiosk-mode.js?hacstag=4973191281421"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/apexcharts-card/apexcharts-card.js?hacstag=331701152223"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/mini-graph-card/mini-graph-card-bundle.js?hacstag=1512800620130"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/vacuum-card/vacuum-card.js?hacstag=2612912952120"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/lovelace-auto-entities/auto-entities.js?hacstag=1677445841161"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/power-flow-card-plus/power-flow-card-plus.js?hacstag=618081815037"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524421"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/clock-weather-card/clock-weather-card.js?hacstag=522634019296"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/ha-sankey-chart/ha-sankey-chart.js?hacstag=455846088640"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/mini-media-player/mini-media-player-bundle.js?hacstag=14852083811612"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js?hacstag=142051833114"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/better-thermostat-ui-card/better-thermostat-ui-card.js?hacstag=439367892330"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/energy-flow-card-plus/energy-flow-card-plus.js?hacstag=638230244023"
+  },
+  {
+    "type": "module",
+    "url": "/local/ookla_speedtest/ookla-speedtest-card.js?v=3.1.2"
+  },
+  {
+    "type": "module",
+    "url": "/local/ookla_speedtest/ookla-speedtest-minimal.js?v=3.1.2"
+  },
+  {
+    "type": "module",
+    "url": "/local/ookla_speedtest/ookla-speedtest-compact.js?v=3.1.2"
+  },
+  {
+    "type": "module",
+    "url": "/local/ookla_speedtest/ookla-speedtest-dashboard.js?v=3.1.2"
+  },
+  {
+    "type": "module",
+    "url": "/local/ookla_speedtest/ookla-speedtest-card-simple.js?v=3.1.2"
+  },
+  {
+    "type": "module",
+    "url": "/hacsfiles/wm_animated_ha_card/washing-machine-card.js?hacstag=1342630269140"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-rooms-v1/myhome-small-appliance-card-v2.js"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-rooms-v1/myhome-cycle-card-v2.js"
+  },
+  {
+    "type": "module",
+    "url": "/local/custom-cards/myhome-cycle-detail-card.js",
+    "_note": "was inline data: URI"
+  },
+  {
+    "type": "module",
+    "url": "/local/custom-cards/myhome-tv-card.js",
+    "_note": "was inline data: URI"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-rooms-v1/myhome-power-device-card-v1.js"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-living-scene-v19.js?v=met20261008"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-floating-settings-v1.js"
+  },
+  {
+    "type": "module",
+    "url": "/unraid/unraid-cards.js?v=2026.10.2-856eb8e8"
+  },
+  {
+    "type": "module",
+    "url": "/local/custom-cards/myhome-energy-health-balance-v1.js",
+    "_note": "was inline data: URI"
+  },
+  {
+    "type": "module",
+    "url": "/local/custom-cards/myhome-lab-speedtest-v1.js",
+    "_note": "was inline data: URI"
+  },
+  {
+    "type": "module",
+    "url": "/local/custom-cards/myhome-tesla-v4.js",
+    "_note": "was inline data: URI"
+  },
+  {
+    "type": "module",
+    "url": "/local/custom-cards/myhome-room-console-v3.js",
+    "_note": "was inline data: URI"
+  },
+  {
+    "type": "module",
+    "url": "/local/custom-cards/myhome-cycle-stable-v2.js",
+    "_note": "was inline data: URI"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-weather-v20.js?v=met20261008"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-studio-weather-v21.js?v=met20261008"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-studio-ui-v21.js?v=20261007.2"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-live-weather-v22.js?v=met20261008"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-live-ui-v22.js?v=20261007.1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-floating-nav-v23.js?v=20261007.2"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-deferred-graph-v2.js?v=20261007.2"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v1.js?v=20261007.2"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-spectrum-v24.js?v=met20261008"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-overview-v3.js?v=20261007.1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v2.js?v=20261007.1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-comet-v25.js?v=met20261008"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v3.js?v=20261007.1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v4.js?v=20261007.1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-comet-v26.js?v=met20261008"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v5.js?v=20261007.1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-overview-v4.js?v=20261007.1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-solar-outlook-v1.js?v=20261007.1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-solar-outlook-v2.js?v=20261007.1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v6.js?v=20261007.1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-quiet-scenes-v27.js?v=met20261008"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-power-metrics-v1.js?v=1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v7.js?v=1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-power-metrics-v2.js?v=1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-overview-v5.js?v=1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v8.js?v=1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-outdoor-weather-v1.js?v=met20261008.2"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-outdoor-weather-v2.js?v=1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-outdoor-forecast-v1.js?v=1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v9.js?v=negativefix2"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-power-metrics-v3.js"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v10.js?v=sourcecolors1"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v11.js"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v12.js"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-power-metrics-v4.js"
+  },
+  {
+    "type": "module",
+    "url": "/local/myhome-scene-v1/myhome-energy-statistics-v13.js"
+  }
+]
