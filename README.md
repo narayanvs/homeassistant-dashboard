@@ -1,88 +1,140 @@
-# Home Assistant — Home Dashboard
+# MyHome — Home Assistant dashboard
 
-A custom Home Assistant dashboard (28 views) built around Mushroom, Bubble Card,
-button-card, ApexCharts and a set of bespoke custom cards (energy flow, room
-consoles, weather, EV, speedtest, appliance cycles). Shared publicly as a
-reference/example.
+A mobile-first dashboard with 29 views: animated home and weather scenes, rooms,
+energy statistics, forecast comparison, power metrics, appliances, security,
+home lab, car, lighting modes and house climate. Exported from the live dashboard
+on 12 October 2026, with personal identifiers replaced by public examples.
 
-> **Sanitized for public sharing.** All personal data has been removed or
-> replaced with placeholders (see **Sanitization** below). You will need to
-> adapt entity IDs, areas and resource paths to your own setup.
+This is a **dashboard reference and frontend bundle**, not a one-click replacement
+for your HA installation. The artwork and layout are included; your integrations,
+entities, helpers, automations and history supply the data. Missing data is not
+invented. Features such as heating controls, laundry reminders and learned energy
+baselines need corresponding backend entities and scripts.
 
 ## Screenshots
 
+These existing examples retain Edenbrook branding and ordinary dashboard readings.
+All nine were visually reviewed; no private names, precise locations, credentials
+or camera imagery were visible. Image metadata has been stripped. They illustrate
+an earlier revision, so some cards differ from the current export.
+
 | Home | Energy flow | Energy statistics |
 |:---:|:---:|:---:|
-| ![Home](screenshots/IMG_3209.PNG) | ![Energy flow](screenshots/IMG_3212.PNG) | ![Energy statistics](screenshots/IMG_3231.PNG) |
-| ![Home balanced](screenshots/IMG_3210.PNG) | ![Home snow](screenshots/IMG_3206.PNG) | ![Home lab](screenshots/IMG_3214.PNG) |
-| ![Home rain](screenshots/IMG_3230.PNG) | ![Power metrics](screenshots/IMG_3232.PNG) | ![Battery health](screenshots/IMG_3213.PNG) |
+| ![Home](screenshots/IMG_3209.jpg) | ![Energy flow](screenshots/IMG_3212.jpg) | ![Energy statistics](screenshots/IMG_3231.jpg) |
+| ![Home balanced](screenshots/IMG_3210.jpg) | ![Home snow](screenshots/IMG_3206.jpg) | ![Home lab](screenshots/IMG_3214.jpg) |
+| ![Home rain](screenshots/IMG_3230.jpg) | ![Power metrics](screenshots/IMG_3232.jpg) | ![Battery health](screenshots/IMG_3213.jpg) |
 
-## Structure
+## Using this dashboard
 
+This is a personal dashboard shared for inspiration and adaptation, rather than a
+maintained HACS project or a plug-and-play package. Use the whole layout or borrow
+the cards you like. There is no installer or automatic setup wizard.
+
+1. Install the third-party cards listed in `resources/resources.json` through
+   HACS. Their `/hacsfiles/` URLs are references; vendor code is not bundled.
+   **washing-machine-card** is required by the appliance wrappers.
+2. Copy `custom-cards/` to `/config/www/custom-cards/`. Register one JavaScript
+   Module resource: `/local/custom-cards/myhome-dashboard.js`. It imports the
+   custom modules and their dependencies. Use the resource list as a checklist;
+   do not replace your existing resource registry.
+3. Copy the contents of `images/` into `/config/www/`, preserving the directories
+   so the `/local/` image paths resolve correctly.
+4. Create a new dashboard with URL `dashboard-myhome`, take control, then paste
+   `dashboard/home-dashboard.yaml` into its raw configuration editor. Keep your
+   existing dashboard while adapting this one. The export uses JSON syntax,
+   which is valid YAML 1.2 and preserves embedded JS/Jinja strings.
+5. Replace example entity IDs with your own. Look in both the dashboard file and
+   `custom-cards/`: some custom cards have defaults or construct IDs from prefixes.
+   `resources/entity-requirements.json` groups the literal references by domain.
+   Creating a dashboard does not create its helpers, scripts or automations.
+
+### Tips for adapting it
+
+- **Start small:** keep Home and one room first. Remove pages and controls you do
+  not need, then add energy, appliances and other sections as their data is ready.
+- **Check the data, not just the name:** replacement sensors need compatible units,
+  attributes and meaning. Power in W is different from energy in kWh; daily totals
+  are different from lifetime counters. History graphs also need recorded data.
+- **Keep navigation consistent:** if you choose another dashboard URL, replace
+  `dashboard-myhome` in the dashboard configuration and custom scripts.
+- **Keep dependencies together:** copy the whole custom-cards directory initially.
+  Some cards inherit from other modules, even when the parent is not visible.
+- **Verify controls:** map the room lights, mode scripts and climate entities
+  before testing their buttons. Remove controls for features you do not have.
+- **Expect empty sections:** appliance and attention strips auto-hide when there
+  is nothing to display. Missing backend entities can also leave cards empty.
+- **Refresh after updates:** if a card still looks old, refresh the HA frontend or
+  clear its frontend cache. Avoid loading old and new copies of the same module.
+- **Try it on your phone:** check scrolling and tap targets on the device you use.
+  Keep heavy graphs lower down and avoid adding unnecessary animated cards.
+- **Keep your adapted copy private:** do not publish your real entity identifiers,
+  credentials, location details, camera images or raw HA configuration by accident.
+
+Appearance uses theme variables and browser-local presets. Adjust your HA theme
+and the scene's appearance controls before changing individual card colors.
+
+### Backend-dependent features
+
+- **Energy:** inverter power and cumulative energy, recorder/statistics history,
+  solar forecast, and compatible flow-allocation entities. Historical attribution
+  cannot be reconstructed accurately from daily totals alone.
+- **Energy learning:** a compatible learning backend and its attributes. The
+  source installation's private custom integration is not included here.
+- **Rooms / lighting / heating:** your presence sensors, dedicated temperature
+  sensors, mode helpers, timers and control scripts. Copying the dashboard alone
+  does not create their automation logic.
+- **Appliances:** power readings plus cycle tracking helpers; dishwasher telemetry
+  where available. The auto-hiding Home strip can legitimately be empty.
+- **Security:** your own authenticated camera/Frigate integration and event access.
+  No snapshots, event records, network shares or camera credentials are included.
+- **Lab / car:** the corresponding integrations and your mapped entities.
+
+The entity list covers literal references, not every dynamically constructed ID.
+Some cards also expect specific attribute schemas. Adapt these against your own
+integrations; matching an entity ID alone does not guarantee matching behavior.
+
+## Included files and previously missing dependencies
+
+| Feature / former filename | Current provider |
+|---|---|
+| `myhome-cycle-stable-v2` | `appliance-cycle.js` → `appliance-animation.js`, `cycle-card.js` and third-party washing-machine-card |
+| `myhome-energy-facts-v2`, `myhome-energy-usage-v2` | `energy-components.js` |
+| `myhome-energy-overview-v5` (current view uses v6) | `energy-overview-controls.js` → `energy-overview-core.js`, `energy-components.js` |
+| `myhome-quiet-live-v27` | `house-scene.js` and its weather/scene bases |
+| `myhome-comet-v26.js` | `energy-flow-animation.js` → `energy-flow-colours.js` and weather modules |
+
+JS filenames are stable, without version suffixes; custom-element identifiers keep
+versions for compatibility. All local import paths resolve within the bundle.
+The 55 image assets include house variants, cloud texture, transparent car artwork,
+room art, banners and generic resident illustrations.
+
+## Privacy checks
+
+The current dashboard configuration and scripts contain no resident names, original household branding,
+charger serial, account email entity ID, private hosts/IPs, credentials, configured
+coordinates, camera snapshots or recorded entity states. Identifiers for people
+and the alarm are generic examples. Room and integration entity IDs remain as
+examples to make adaptation practical.
+
+PNG text, EXIF and provenance metadata has been removed without changing pixels.
+SVG metadata/comments were removed. The phone screenshots retain approved Edenbrook branding and ordinary usage readings;
+see the visual review note above. Artwork is illustrative; it is not a photograph
+of the source household.
+
+Run the repeatable checks before sharing changes:
+
+```sh
+python3 tools/validate.py
 ```
-HA_Dashboard/
-├── dashboard/
-│   └── home-dashboard.yaml      # the full dashboard config (28 views)
-├── custom-cards/                # 19 bespoke custom cards (ES modules)
-│   ├── myhome-room-console-v3.js
-│   ├── myhome-energy-overview-v5.js
-│   ├── myhome-tesla-v4.js
-│   └── ... (see folder)
-├── resources/
-│   └── resources.json           # Lovelace resource registry (HACS + /local modules)
-├── images/                      # referenced artwork (room icons, banners, avatars)
-│   ├── myhome-room-icons-v1/
-│   ├── myhome-rooms-v1/  myhome-rooms-v3/
-│   ├── myhome-dashboard-banners/
-│   └── myhome-scene-v1/         # resident avatar SVGs (generic illustrations)
-└── README.md
-```
 
-## Requirements (HACS cards used)
-
-Install these via HACS (referenced in `resources/resources.json`):
-Mushroom, Bubble Card, button-card, auto-entities, ApexCharts Card,
-mini-graph-card, vertical-stack-in-card, card-mod, kiosk-mode,
-swipe-navigation, power-flow-card-plus, energy-flow-card-plus, clock-weather-card,
-mini-media-player, vacuum-card, better-thermostat-ui-card, LG WebOS Remote Control,
-ha-sankey-chart, washing-machine-card.
-
-The `myhome-*` cards in `custom-cards/` are custom — copy them to
-`/config/www/custom-cards/` and register each as a `module` resource
-(`/local/custom-cards/<file>.js`). Images go under `/config/www/` matching the
-`/local/...` paths in the YAML.
-
-## Setup (outline)
-
-1. Install the HACS cards above.
-2. Copy `custom-cards/*.js` to `config/www/custom-cards/` and register them as
-   dashboard resources (type: JavaScript Module).
-3. Copy `images/*` to `config/www/` preserving the folder names.
-4. Create a new dashboard (storage mode), take control, and paste
-   `dashboard/home-dashboard.yaml` as the raw config.
-5. **Replace the placeholder entity IDs with your own** — the dashboard
-   references entities named for a specific setup (Sigen inverter, Zappi EV
-   charger, Reolink/Frigate cameras, a Tesla, Shelly/Tasmota switches, etc.).
-
-## Sanitization
-
-The following were replaced before publishing — none of these are present in
-any file:
-
-- **Household/branding name** → `myhome` (all casings).
-- **Resident names** → `person.resident_1` / `person.resident_2`, display
-  labels → `Resident 1` / `Resident 2`; avatar SVGs → `resident-1-avatar` /
-  `resident-2-avatar` (the avatars are generic vector illustrations — no
-  photos, faces or names).
-- **Device serial** (EV charger) → zeroed.
-- Verified **absent**: IP addresses, hostnames (DuckDNS / Nabu Casa / `.local`),
-  e-mail addresses, API keys / passwords / tokens / bearer / client secrets,
-  webhook IDs, GPS coordinates. The dashboard never embedded any of these.
-
-> Note: the AI-generated room/banner images carry a `trufo.ai` content-provenance
-> watermark (a C2PA signature indicating the artwork was AI-generated). This is a
-> tool marker, not personal data.
+This checks common secret patterns, metadata, local imports/assets, resource paths
+and navigation. It is one safeguard, not proof that arbitrary future content is
+safe. Visually inspect screenshots before adding them. Never commit your private
+adaptations, raw HA exports, backups or `.storage` data.
+**Earlier Git commits are separate from this sanitized working tree**: deleting a
+file in a new commit does not remove its old versions from Git history.
 
 ## License
 
 Shared as-is for reference. Adapt freely to your own Home Assistant setup.
+Third-party cards retain their respective licenses and are installed separately.

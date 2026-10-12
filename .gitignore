@@ -34,3 +34,11 @@ Desktop.ini
 
 # Internal export artifacts (not part of the dashboard)
 _export_report.json
+
+# Private adaptations and local working files
+entities.local*.json
+private-entities*.json
+build/
+prepared/
+__pycache__/
+*.pyc
