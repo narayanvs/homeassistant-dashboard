@@ -2,11 +2,11 @@
 (()=>{
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 class SecurityFeed extends HTMLElement{
- constructor(){super();this.attachShadow({mode:'open'});this.events=[];this.camera='all';this.hours=24;this.urls=new Map();this.limit=40;this.onVisibility=()=>{if(!document.hidden)this.load()};}
+ constructor(){super();this.attachShadow({mode:'open'});this.events=[];this.camera='all';this.hours=24;this.urls=new Map();this.limit=40;this.onVisibility=()=>{if(!document.hidden&&this.feedVisible)this.load()};}
  setConfig(c){this.config=c;this.render();}
- set hass(h){this._hass=h;if(this.isConnected&&!this.started){this.started=true;this.load();}}
- connectedCallback(){this.timer=setInterval(()=>{if(!document.hidden)this.load(true)},60000);document.addEventListener('visibilitychange',this.onVisibility);if(this._hass&&!this.started){this.started=true;this.load();}}
- disconnectedCallback(){clearInterval(this.timer);document.removeEventListener('visibilitychange',this.onVisibility);this.started=false;this.observer?.disconnect();this.shadowRoot.querySelector('dialog')?.close();}
+ set hass(h){this._hass=h;if(this.isConnected&&this.feedVisible&&!this.started){this.started=true;this.load();}}
+ connectedCallback(){this.feedObserver=new IntersectionObserver(es=>{this.feedVisible=es.some(e=>e.isIntersecting);if(this.feedVisible&&this._hass){this.started=true;this.load(true);}}, {rootMargin:'120px'});this.feedObserver.observe(this);this.timer=setInterval(()=>{if(!document.hidden&&this.feedVisible)this.load(true)},60000);document.addEventListener('visibilitychange',this.onVisibility);}
+ disconnectedCallback(){clearInterval(this.timer);this.feedObserver?.disconnect();document.removeEventListener('visibilitychange',this.onVisibility);this.started=false;this.observer?.disconnect();this.shadowRoot.querySelector('dialog')?.close();}
  getCardSize(){return 10} getGridOptions(){return {columns:12,rows:'auto'}}
  async load(quiet=false,more=false){if(this.loading||!this._hass||!this.isConnected||(quiet&&this.shadowRoot.querySelector('dialog')?.open))return;this.loading=true;try{
  const q={type:'frigate/events/get',instance_id:this.config.instance_id||'frigate',cameras:this.camera==='all'?['front','parking','garden','patio']:[this.camera],labels:['person'],after:Math.floor(Date.now()/1000-this.hours*3600),limit:this.limit,has_snapshot:true};

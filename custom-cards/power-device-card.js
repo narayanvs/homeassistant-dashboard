@@ -27,8 +27,8 @@ class MyHomePowerDeviceCard extends HTMLElement {
     const root = this.attachShadow({ mode: "open" });
     root.innerHTML = `
       <style>
-        :host{display:block;font-family:var(--primary-font-family,inherit);--eb-accent:#9a6426}
-        :host(.eb-dark){--eb-accent:#d5ab6c}
+        :host{display:block;font-family:var(--primary-font-family,inherit);--eb-accent:var(--myhome-accent,var(--accent-color,#9a6426))}
+        :host(.eb-dark){--eb-accent:var(--myhome-accent,var(--accent-color,#d5ab6c))}
         ha-card{box-sizing:border-box;position:relative;overflow:hidden;padding:15px;border-radius:20px;
           border:0.5px solid color-mix(in srgb,var(--primary-text-color) 10%,transparent);
           background:linear-gradient(135deg,color-mix(in srgb,var(--card-background-color) 96%,var(--eb-accent) 4%),var(--card-background-color));color:var(--primary-text-color)}

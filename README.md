@@ -73,6 +73,24 @@ the cards you like. There is no installer or automatic setup wizard.
 Appearance uses theme variables and browser-local presets. Adjust your HA theme
 and the scene's appearance controls before changing individual card colors.
 
+### Latest dashboard refinements
+
+- Compact icon-only floating navigation, including Appliances, with hide/show.
+- Expanded Home Lab panels with resource rings, network and radio diagnostics.
+- Appearance presets now reach room controls, activity timelines, appliance icons
+  and forecast card backgrounds. Chart series retain their distinct colours.
+- A folded Sensor health summary and active override countdowns on House.
+  Lighting pause controls auto-hide in rooms when inactive. Ending a pause makes
+  the existing automation eligible again; it does not force heating or lights on.
+- Appliance animations pause off-screen, and security events refresh only while
+  the event card is visible.
+
+Sensor checks use the explicitly configured readings: unavailable values, low
+batteries and temperature reports older than six hours. Adjust the monitored
+entities and reporting threshold for your devices. Old reports are a prompt to
+check a sensor, not proof it is offline; healthy sensors may report infrequently.
+Countdown controls require your existing HA timers and automation logic.
+
 ### Backend-dependent features
 
 - **Energy:** inverter power and cumulative energy, recorder/statistics history,
@@ -105,7 +123,7 @@ integrations; matching an entity ID alone does not guarantee matching behavior.
 
 JS filenames are stable, without version suffixes; custom-element identifiers keep
 versions for compatibility. All local import paths resolve within the bundle.
-The 55 image assets include house variants, cloud texture, transparent car artwork,
+The 58 image assets include house variants, cloud texture, transparent car artwork,
 room art, banners and generic resident illustrations.
 
 ## Privacy checks

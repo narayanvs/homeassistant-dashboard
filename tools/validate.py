@@ -4,6 +4,8 @@ import json,pathlib,re,struct,sys
 root=pathlib.Path(__file__).resolve().parents[1];errors=[]
 config=json.loads((root/'dashboard/home-dashboard.yaml').read_text())
 patterns={
+ 'embedded image payload':r'data:image/[^;]+;base64,',
+ 'hardware address':r'(?i)\b(?:[0-9a-f]{2}:){5}[0-9a-f]{2}\b|\b0x[0-9a-f]{16}\b',
  'email':r'(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b',
  'IP address':r'\b(?:\d{1,3}\.){3}\d{1,3}\b',
  'JWT':r'\beyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]+',

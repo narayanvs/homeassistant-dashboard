@@ -75,6 +75,7 @@ Promise.all([
 :host(.wm-dark) .machine rect[fill="#9aa6b4"], :host(.wm-dark) .machine rect[fill="#b7c0cb"] { fill: #778493; }
 `;
         style.textContent += "\n:host(.wm-native){--wm-accent:var(--myhome-accent-deep,#9a6426);--wm-btn-on-bg:color-mix(in srgb,var(--card-background-color) 88%,var(--wm-accent) 12%);--wm-btn-on-border:var(--wm-accent)}\n:host(.wm-native-dark){--wm-accent:var(--myhome-accent,#d5ab6c);--wm-btn-on-bg:color-mix(in srgb,var(--card-background-color) 84%,var(--wm-accent) 16%)}\n:host ha-card::before{background:linear-gradient(90deg,var(--wm-accent),color-mix(in srgb,var(--wm-accent) 70%,var(--wm-text) 30%))}\n.machine [stroke=\"#2f80ed\"],.h-icon svg [stroke=\"#2f80ed\"]{stroke:var(--wm-accent)}\n.machine [fill=\"#2f80ed\"],.h-icon svg [fill=\"#2f80ed\"]{fill:var(--wm-accent)}\n.machine [stroke=\"#7eb6ff\"]{stroke:color-mix(in srgb,var(--wm-accent) 70%,white 30%)}\n";
+        style.textContent += "\n.h-icon svg{stroke:var(--wm-accent)}\n";
         root.appendChild(style);
         if (this._config.power_switch_entity) {
           const powerButton = document.createElement("div");
