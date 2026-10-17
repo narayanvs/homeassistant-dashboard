@@ -1,4 +1,4 @@
-import './energy-overview-controls.js';
+import './energy-overview-controls.js?rev=20261017';
 customElements.whenDefined('myhome-energy-overview-v5').then(() => {
   class MyHomeEnergyOverviewV6 extends customElements.get('myhome-energy-overview-v5') {
     build() {

@@ -4,6 +4,8 @@ import json,pathlib,re,struct,sys
 root=pathlib.Path(__file__).resolve().parents[1];errors=[]
 config=json.loads((root/'dashboard/home-dashboard.yaml').read_text())
 patterns={
+ 'private resident identifier':r'(?i)\b(?:person\.(?!resident_[12]\b)[a-z0-9_]+|alarm_control_panel\.(?!home_alarm\b)[a-z0-9_]+|calendar\.(?!(?:family|personal|school|birthdays|birthdays_and_anniversaries|ireland_holidays|maintenance_schedule|us_federal_holidays|australia_holidays|waste_collection_schedule_greyhound_recycling|value|js)\b)[a-z0-9_]+)',
+ 'private domain':r'''(?i)https?://(?!www\.w3\.org/2000/svg)[^\s/"']+''',
  'embedded image payload':r'data:image/[^;]+;base64,',
  'hardware address':r'(?i)\b(?:[0-9a-f]{2}:){5}[0-9a-f]{2}\b|\b0x[0-9a-f]{16}\b',
  'email':r'(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b',
@@ -15,10 +17,14 @@ patterns={
 }
 files=[p for p in root.rglob('*') if p.is_file() and '.git' not in p.relative_to(root).parts]
 for f in files:
- if f.suffix.lower() in ['.js','.yaml','.json','.md','.svg']:
+ if f.suffix.lower() in ['.js','.yaml','.json','.md','.svg','.py']:
   text=f.read_text()
   for label,pat in patterns.items():
-   if re.search(pat,text):errors.append(f'{f.relative_to(root)}: possible {label} (review privately)')
+   scan=text
+   if label=='private domain':
+    for public_url in ['https://github.com/narayanvs/homeassistant-dashboard','https://github.com/narayanvs/mobile-dashboard-starter']:
+     scan=re.sub(re.escape(public_url)+r"""(?=[\s)"'<>]|$)""",'PUBLIC_REPOSITORY',scan)
+   if re.search(pat,scan):errors.append(f'{f.relative_to(root)}: possible {label} (review privately)')
   for rel in re.findall(r'/local/([a-zA-Z0-9_./-]+\.(?:png|svg|jpg|webp|js))',text):
    if not (root/rel).exists() and not (root/'images'/rel).exists():errors.append(f'{f.name}: missing asset {rel}')
   if f.suffix=='.js':
@@ -47,6 +53,25 @@ paths={v['path'] for v in config['views']}
 for destination in re.findall(r'/dashboard-myhome/([a-z0-9_]+)',json.dumps(config)):
  if destination not in paths:errors.append(f'Missing view {destination}')
 for resource in json.loads((root/'resources/resources.json').read_text()):
- if resource['url'].startswith('/local/') and not (root/resource['url'][7:]).exists():errors.append('Missing registered module '+resource['url'])
+ if resource['url'].startswith('/local/') and not (root/resource['url'][7:].split('?',1)[0]).exists():errors.append('Missing registered module '+resource['url'])
+# Check the actual entry point, not just whether files exist somewhere.
+entry=root/'custom-cards/myhome-dashboard.js'
+reachable=set()
+def visit(module):
+ if module in reachable or not module.is_file():return
+ reachable.add(module)
+ for rel in re.findall(r"(?:import\s*(?:\(\s*)?|from\s*)[\"'](\./[^\"'?]+)",module.read_text()):
+  visit((module.parent/rel).resolve())
+visit(entry.resolve())
+source='\n'.join(p.read_text() for p in reachable)
+for tag in sorted(set(re.findall(r'custom:([a-z0-9-]+)',json.dumps(config)))):
+ if 'myhome' not in tag:continue
+ base=tag.removeprefix('accent-')
+ if not re.search(r"[\"']"+re.escape(base)+r"[\"']",source):
+  errors.append('No bundled provider reachable from entry point for '+tag)
+ if tag.startswith('accent-') and not (root/'custom-cards/accent-panels.js').resolve() in reachable:
+  errors.append('Accent wrapper module missing from entry point for '+tag)
+for module in (root/'custom-cards').glob('*.js'):
+ if module.resolve() not in reachable:errors.append('Module omitted from entry point: '+module.name)
 if errors:print('\n'.join(errors));sys.exit(1)
-print(f'PASS: {len(config["views"])} views; imports, literal asset paths, navigation, resource paths and privacy patterns checked. Visual review and history review are separate.')
+print(f'PASS: {len(config["views"])} views; loader coverage, bundled card providers, imports, literal asset paths, navigation, resource paths and privacy patterns checked. Visual review and history review are separate.')

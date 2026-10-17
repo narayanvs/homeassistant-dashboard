@@ -1,3 +1,4 @@
+import './device-art.js?rev=20261017';
 /* Compact, theme-aware MyHome TV card for the Test dashboard. */
 class MyHomeTVCard extends HTMLElement {
   setConfig(config) {
@@ -30,7 +31,7 @@ class MyHomeTVCard extends HTMLElement {
     if (this.shadowRoot) return;
     const root = this.attachShadow({ mode: "open" });
     const css = [
-      ":host{display:block;font-family:var(--primary-font-family,inherit);--eb-blue:var(--myhome-accent-deep,#9a6426)}:host(.eb-dark){--eb-blue:var(--myhome-accent,#d5ab6c)}",
+      ":host{display:block;font-family:var(--myhome-font-family,var(--primary-font-family,inherit));--eb-blue:var(--myhome-accent-deep,#9a6426)}:host(.eb-dark){--eb-blue:var(--myhome-accent,#d5ab6c)}",
       "ha-card{display:block;position:relative;box-sizing:border-box;overflow:hidden;padding:15px;border-radius:20px;border:0.5px solid color-mix(in srgb,var(--primary-text-color) 10%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--card-background-color) 95%,var(--myhome-accent-deep,#a97332) 5%),var(--card-background-color));color:var(--primary-text-color)}",
       "ha-card:before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--myhome-accent-deep,#a97332),var(--myhome-accent-soft,#e0b875))}",
       "header{display:flex;align-items:center;gap:8px;min-width:0}.badge-icon{width:36px;height:36px;display:grid;place-items:center;flex:none;border-radius:11px;background:color-mix(in srgb,var(--card-background-color) 83%,var(--myhome-accent-deep,#a97332) 17%);color:var(--eb-blue)}.badge-icon ha-icon{--mdc-icon-size:24px}",
@@ -48,6 +49,7 @@ class MyHomeTVCard extends HTMLElement {
       "<div class='screen' role='button' tabindex='0'><span class='shine'></span><ha-icon class='screen-icon' icon='mdi:television'></ha-icon><span class='screen-copy'><strong></strong><span></span></span></div>" +
       "<div class='powerline'><span>Current power</span><strong></strong></div><div class='stats'><button class='stat today'><small>TODAY</small><strong></strong></button><button class='stat month'><small>THIS MONTH</small><strong></strong></button></div><div class='player'></div></ha-card>";
     const q = s => root.querySelector(s);
+    const art=document.createElement('myhome-device-art');art.setAttribute('kind','tv');art.style.cssText='width:110px;height:98px;flex:none;z-index:1;';q('.screen').prepend(art);const motionStyle=document.createElement('style');motionStyle.textContent='.screen-icon{display:none!important}.screen:before{display:none}.screen{padding:8px 12px;gap:10px}.screen myhome-device-art{filter:none}';root.append(motionStyle);
     q(".title strong").textContent = this._config.name || "TV";
     q(".history").onclick = () => this._more(this._config.power_entity);
     q(".remote").onclick = () => { window.location.hash = this._config.remote_hash; };
@@ -91,7 +93,7 @@ class MyHomeTVCard extends HTMLElement {
     const plugOn = this._state(c.plug_entity)?.state === "on";
     const source = media?.attributes?.source, title = media?.attributes?.media_title;
     q(".title small").textContent = !available ? "TV unavailable" : playing ? "Playing" : state === "paused" ? "Paused" : inferredUse ? "TV in use" : "TV on";
-    q(".screen").classList.toggle("playing", animated);
+    q(".screen").classList.toggle("playing", animated);q("myhome-device-art").active=animated&&plugOn;
     q(".screen-icon").setAttribute("icon", animated ? "mdi:television-play" : "mdi:television");
     q(".screen-copy strong").textContent = appTitle || appName || title || (inferredUse ? "TV in use" : available ? "Ready to play" : "TV is off");
     q(".screen-copy span").textContent = appName ? "App: " + appName : available && source ? "Input: " + source + (c.app_entity && !appLive ? " · app unavailable" : "") : (plugOn ? "Plug on" : "Plug off");

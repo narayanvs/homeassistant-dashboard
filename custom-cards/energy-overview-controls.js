@@ -1,4 +1,4 @@
-import './energy-overview-core.js';
+import './energy-overview-core.js?rev=20261017';
 customElements.whenDefined('myhome-energy-overview-v4').then(()=>{
 class MyHomeEnergyOverviewV5 extends customElements.get('myhome-energy-overview-v4'){
  build(){super.build();const s=document.createElement('style');s.textContent=':host(.today) .node.grid .value,:host(.today) .node.battery .value{font-size:12px;font-weight:550;opacity:.85}:host(.today) .node.grid .sub,:host(.today) .node.battery .sub{font-size:13px;font-weight:650;opacity:1;line-height:1.35}@container(max-width:390px){:host(.today) .node.grid .value,:host(.today) .node.battery .value{font-size:10px}:host(.today) .node.grid .sub,:host(.today) .node.battery .sub{font-size:11px}}';this.shadowRoot.append(s);}

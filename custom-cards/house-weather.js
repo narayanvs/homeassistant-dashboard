@@ -1,5 +1,5 @@
 /* Atmospheric layers for MyHome. Cached cloud texture, bounded 30 fps, stable DOM. */
-import './house-scene-base.js';
+import './house-scene-base.js?rev=20261017';
 const BASE=customElements.get('myhome-live-base-v22'),W=760,H=625,TAU=Math.PI*2;
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const presets={sun:{cloud:.025,warm:1},partial:{cloud:.48,warm:.65},cloud:{cloud:.9},rain:{cloud:1,rain:.65,wet:1},pour:{cloud:1,rain:1,wet:1},snow:{cloud:.65,snow:1},fog:{cloud:0,fog:1},wind:{cloud:.7,wind:1},sleet:{cloud:.9,rain:.55,snow:.45,wet:1,wind:.65,sleet:1},hail:{cloud:.9,hail:1,wet:1},storm:{cloud:1,rain:1,storm:1,wet:1},thunder:{cloud:1,storm:1},night:{cloud:.25,night:1},stars:{cloud:0,night:1},alert:{cloud:.8,wind:.5},unknown:{cloud:.2}};

@@ -1,3 +1,4 @@
+import './device-art.js?rev=20261017';
 /* Compact monitored-plug card used by the Test dashboard. */
 class MyHomePowerDeviceCard extends HTMLElement {
   setConfig(config) {
@@ -27,7 +28,7 @@ class MyHomePowerDeviceCard extends HTMLElement {
     const root = this.attachShadow({ mode: "open" });
     root.innerHTML = `
       <style>
-        :host{display:block;font-family:var(--primary-font-family,inherit);--eb-accent:var(--myhome-accent,var(--accent-color,#9a6426))}
+        :host{display:block;font-family:var(--myhome-font-family,var(--primary-font-family,inherit));--eb-accent:var(--myhome-accent,var(--accent-color,#9a6426))}
         :host(.eb-dark){--eb-accent:var(--myhome-accent,var(--accent-color,#d5ab6c))}
         ha-card{box-sizing:border-box;position:relative;overflow:hidden;padding:15px;border-radius:20px;
           border:0.5px solid color-mix(in srgb,var(--primary-text-color) 10%,transparent);
@@ -48,6 +49,7 @@ class MyHomePowerDeviceCard extends HTMLElement {
       <div class="visual" role="button" tabindex="0"><span class="orb"><ha-icon></ha-icon></span><span class="visual-copy"><strong></strong><span>Current power</span></span></div>
       <div class="meter"><span></span></div><div class="stats"><button class="stat today"><small>TODAY</small><strong></strong></button><button class="stat month"><small>THIS MONTH</small><strong></strong></button></div></ha-card>`;
     const q = s => root.querySelector(s);
+    const art=document.createElement('myhome-device-art');const hint=(this._config.art_kind||this._config.name||'').toLowerCase();art.setAttribute('kind',hint.includes('gaming')||hint==='pc'?'pc':hint.includes('desk')?'desk':hint.includes('router')?'router':hint.includes('server')||hint.includes('lab')?'server':hint.includes('switch')||hint==='network'?'network':'device');q('.orb').append(art);const motionStyle=document.createElement('style');motionStyle.textContent='.orb{width:94px;height:90px;background:transparent;border-radius:0}.orb>ha-icon,.orb::after{display:none!important}.orb myhome-device-art{width:100%;height:100%}';root.append(motionStyle);
     q(".history").onclick = () => this._more(this._config.power_entity);
     q(".plug").onclick = () => this._toggle();
     q(".visual").onclick = () => this._more(this._config.plug_entity);
@@ -67,7 +69,7 @@ class MyHomePowerDeviceCard extends HTMLElement {
     q(".orb ha-icon").setAttribute("icon", icon);
     q(".title strong").textContent = c.name || "Power device";
     q(".title small").textContent = plug === "off" ? "Power off" : !known || plug === "unavailable" ? "Power unavailable" : active ? "In use" : "Standby";
-    q(".visual").classList.toggle("active", active);
+    q(".visual").classList.toggle("active", active);q("myhome-device-art").active=active;
     q(".visual-copy strong").textContent = known ? (power >= 1000 ? (power / 1000).toFixed(2) + " kW" : power.toFixed(1) + " W") : "—";
     q(".visual-copy span").textContent = active ? "Drawing power now" : plug === "off" ? "Plug off" : "Current power";
     q(".meter span").style.width = known ? Math.min(100, Math.max(0, power / (c.power_max || 500) * 100)) + "%" : "0%";

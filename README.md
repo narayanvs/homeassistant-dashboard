@@ -1,15 +1,41 @@
 # MyHome — Home Assistant dashboard
 
-A mobile-first dashboard with 29 views: animated home and weather scenes, rooms,
+A mobile-first dashboard with 30 views: animated home and weather scenes, rooms,
 energy statistics, forecast comparison, power metrics, appliances, security,
 home lab, car, lighting modes and house climate. Exported from the live dashboard
-on 12 October 2026, with personal identifiers replaced by public examples.
+on 17 October 2026, with personal identifiers replaced by public examples.
 
 This is a **dashboard reference and frontend bundle**, not a one-click replacement
 for your HA installation. The artwork and layout are included; your integrations,
 entities, helpers, automations and history supply the data. Missing data is not
 invented. Features such as heating controls, laundry reminders and learned energy
 baselines need corresponding backend entities and scripts.
+
+## Which repository should I use?
+
+- **[Original dashboard — sanitised reference](https://github.com/narayanvs/homeassistant-dashboard):** this repository. The full layout and frontend from my actual home, with personal details replaced. It needs your own entities, integrations and backend routines.
+- **[Mobile Dashboard Starter — generic demo and setup wizard](https://github.com/narayanvs/mobile-dashboard-starter):** start here for a HACS beta, visual setup, automatic discovery and labelled demo data. It is the easier way to build your own dashboard.
+
+## Start here
+
+**Please don’t copy and paste the whole dashboard as-is.** It was built around
+one household’s devices, entity names and automations. Use it as a visual
+reference, rather than expecting everything to work unchanged.
+
+The approach I recommend is to connect your own Home Assistant to an AI assistant
+through Home Assistant MCP, then ask it to build a similar-looking dashboard
+using the integrations and entities you actually have. Share screenshots or point
+it at the cards you like, start with one page and refine it together. Keep a backup
+and ask it to verify entities and controls before making changes.
+
+For example:
+
+> Use this repository as design inspiration. Inspect my Home Assistant entities
+> and integrations, then create a separate mobile dashboard with a similar style.
+> Start with Home and one room, keep my existing dashboard, and don’t invent data
+> or change my automations without discussing it first.
+
+You can also adapt the files manually; the steps below explain how.
 
 ## Screenshots
 
@@ -34,7 +60,7 @@ the cards you like. There is no installer or automatic setup wizard.
    HACS. Their `/hacsfiles/` URLs are references; vendor code is not bundled.
    **washing-machine-card** is required by the appliance wrappers.
 2. Copy `custom-cards/` to `/config/www/custom-cards/`. Register one JavaScript
-   Module resource: `/local/custom-cards/myhome-dashboard.js`. It imports the
+   Module resource: `/local/custom-cards/myhome-dashboard.js?rev=20261017`. It imports the
    custom modules and their dependencies. Use the resource list as a checklist;
    do not replace your existing resource registry.
 3. Copy the contents of `images/` into `/config/www/`, preserving the directories
@@ -75,6 +101,19 @@ and the scene's appearance controls before changing individual card colors.
 
 ### Latest dashboard refinements
 
+- Compact two-column Lighting Modes controls with distinct automatic/manual awake
+  and resting states, readable room labels and phone-sized controls.
+- Family calendar with month, week, day and agenda views, horizontally scrolling
+  calendar filters and a compact Home summary. Configure your own writable HA
+  calendar entities; no events or personal calendar identifiers are included.
+- Shared, theme-aware appliance artwork, including distinct washer/dryer animation,
+  wall-mounted TV, gaming PC and dual-monitor desk; animation pauses off-screen.
+- Room wake-up and Holiday & Away controls reference existing backend routines.
+  Those routines are not installed by copying this dashboard.
+- Expanded Energy panels for meter history, tariff bands, supplier gas and folding
+  sections. These require the matching data schema and supplier integrations.
+- Browser-local font selection and a compact, draggable floating Appearance menu.
+
 - Compact icon-only floating navigation, including Appliances, with hide/show.
 - Expanded Home Lab panels with resource rings, network and radio diagnostics.
 - Appearance presets now reach room controls, activity timelines, appliance icons
@@ -111,10 +150,25 @@ The entity list covers literal references, not every dynamically constructed ID.
 Some cards also expect specific attribute schemas. Adapt these against your own
 integrations; matching an entity ID alone does not guarantee matching behavior.
 
+### If Home Assistant says a custom card is missing
+
+A card type such as `custom:myhome-preset-live-v1` is a JavaScript element name,
+**not a file to download with that name**. This one is defined in
+`custom-cards/appearance-presets.js` and inherits the house scene from other
+modules. Copy the entire `custom-cards/` folder and register the single entry
+point `/local/custom-cards/myhome-dashboard.js?rev=20261017`, after installing the
+third-party prerequisites. Loading only one file may leave its parent missing.
+
+If you already copied an older export, update the whole folder, check that the
+entry-point URL has the current revision, then reload the frontend. Keep the
+revision on imports and resources consistent. The validator checks that every
+bundled card type used by the dashboard has a provider reachable from the loader.
+
 ## Included files and previously missing dependencies
 
 | Feature / former filename | Current provider |
 |---|---|
+| `myhome-preset-live-v1` | `appearance-presets.js` → house scene modules; loaded by `myhome-dashboard.js` |
 | `myhome-cycle-stable-v2` | `appliance-cycle.js` → `appliance-animation.js`, `cycle-card.js` and third-party washing-machine-card |
 | `myhome-energy-facts-v2`, `myhome-energy-usage-v2` | `energy-components.js` |
 | `myhome-energy-overview-v5` (current view uses v6) | `energy-overview-controls.js` → `energy-overview-core.js`, `energy-components.js` |
@@ -122,8 +176,11 @@ integrations; matching an entity ID alone does not guarantee matching behavior.
 | `myhome-comet-v26.js` | `energy-flow-animation.js` → `energy-flow-colours.js` and weather modules |
 
 JS filenames are stable, without version suffixes; custom-element identifiers keep
-versions for compatibility. All local import paths resolve within the bundle.
-The 58 image assets include house variants, cloud texture, transparent car artwork,
+versions for compatibility. All local import paths resolve within the bundle. Resource and import URLs share
+`?rev=20261017` for cache invalidation; keep these in step when updating files.
+Do not load the entry point alongside separately registered copies with different
+revision URLs. The URL revision is not part of the filename.
+The image assets include house variants, cloud texture, transparent car artwork,
 room art, banners and generic resident illustrations.
 
 ## Privacy checks
