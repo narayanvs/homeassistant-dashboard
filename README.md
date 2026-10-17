@@ -22,7 +22,7 @@ baselines need corresponding backend entities and scripts.
 one household’s devices, entity names and automations. Use it as a visual
 reference, rather than expecting everything to work unchanged.
 
-The approach I recommend is to connect your own Home Assistant to an AI assistant
+**Recommended: customise with AI and Home Assistant MCP.** Connect your own Home Assistant to an AI assistant
 through Home Assistant MCP, then ask it to build a similar-looking dashboard
 using the integrations and entities you actually have. Share screenshots or point
 it at the cards you like, start with one page and refine it together. Keep a backup
@@ -35,7 +35,9 @@ For example:
 > Start with Home and one room, keep my existing dashboard, and don’t invent data
 > or change my automations without discussing it first.
 
-You can also adapt the files manually; the steps below explain how.
+AI and MCP are optional. For a simpler starting point without AI or manual file
+editing, use the linked Mobile Dashboard Starter and its visual setup wizard.
+You can also adapt this reference manually; the steps below explain how.
 
 ## Screenshots
 
