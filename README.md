@@ -39,18 +39,21 @@ AI and MCP are optional. For a simpler starting point without AI or manual file
 editing, use the linked Mobile Dashboard Starter and its visual setup wizard.
 You can also adapt this reference manually; the steps below explain how.
 
-## Screenshots
+## Preview
 
-These existing examples retain Edenbrook branding and ordinary dashboard readings.
-All nine were visually reviewed; no private names, precise locations, credentials
-or camera imagery were visible. Image metadata has been stripped. They illustrate
-an earlier revision, so some cards differ from the current export.
+Light and dark examples from the original dashboard. Dark screenshots show an
+earlier revision; some cards have since changed.
+Tap an image for full size.
 
-| Home | Energy flow | Energy statistics |
-|:---:|:---:|:---:|
-| ![Home](screenshots/IMG_3209.jpg) | ![Energy flow](screenshots/IMG_3212.jpg) | ![Energy statistics](screenshots/IMG_3231.jpg) |
-| ![Home balanced](screenshots/IMG_3210.jpg) | ![Home snow](screenshots/IMG_3206.jpg) | ![Home lab](screenshots/IMG_3214.jpg) |
-| ![Home rain](screenshots/IMG_3230.jpg) | ![Power metrics](screenshots/IMG_3232.jpg) | ![Battery health](screenshots/IMG_3213.jpg) |
+| Home · dark | Home · light |
+| --- | --- |
+| [<img src="screenshots/IMG_3209.jpg" width="250" alt="Home · dark"/>](screenshots/IMG_3209.jpg) | [<img src="docs/screenshots/light/01-home-light.jpg" width="250" alt="Home · light"/>](docs/screenshots/light/01-home-light.jpg) |
+
+| Energy · dark | Energy · light |
+| --- | --- |
+| [<img src="screenshots/IMG_3231.jpg" width="250" alt="Energy · dark"/>](screenshots/IMG_3231.jpg) | [<img src="docs/screenshots/light/03-energy-statistics-light.jpg" width="250" alt="Energy · light"/>](docs/screenshots/light/03-energy-statistics-light.jpg) |
+
+[Browse the full screenshot gallery →](docs/gallery.md)
 
 ## Using this dashboard
 
@@ -179,9 +182,6 @@ bundled card type used by the dashboard has a provider reachable from the loader
 
 JS filenames are stable, without version suffixes; custom-element identifiers keep
 versions for compatibility. All local import paths resolve within the bundle. Resource and import URLs share
-`?rev=20261017-light8` for cache invalidation; keep these in step when updating files.
-Do not load the entry point alongside separately registered copies with different
-revision URLs. The URL revision is not part of the filename. Resource and import URLs share
 `?rev=20261017-light8` for cache invalidation; keep these in step when updating files.
 Do not load the entry point alongside separately registered copies with different
 revision URLs. The URL revision is not part of the filename.
