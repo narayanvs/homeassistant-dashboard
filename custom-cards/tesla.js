@@ -1,6 +1,7 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 class MyHomeTeslaV4 extends HTMLElement {
  setConfig(c){this.config=c||{};if(!this.shadowRoot)this.build();}
- set hass(h){this.h=h;if(this.shadowRoot)this.update();}
+ set hass(h){myhomeTheme(this);this.h=h;if(this.shadowRoot)this.update();}
  getCardSize(){return 12;}
  getGridOptions(){return {columns:'full',rows:'auto'};}
  id(k,d='sensor'){return `${d}.parking_tesla_my_${k}`;}

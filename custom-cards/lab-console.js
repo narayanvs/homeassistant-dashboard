@@ -1,9 +1,10 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 (()=>{
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 class LabConsole extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this.shadowRoot.addEventListener('click',e=>{const toggle=e.target.closest('[data-toggle]'),short=e.target.closest('[data-shortcut]');if(toggle||short){this.open=short?true:!this.open;this.section=short?short.dataset.shortcut:null;this.sig=null;this.update();return;}const b=e.target.closest('[data-entity]');if(b)this.dispatchEvent(new CustomEvent('hass-more-info',{detail:{entityId:b.dataset.entity},bubbles:true,composed:true}));});}
  setConfig(c){this.c=c;this.sig=null;this.update();}
- set hass(h){this.h=h;this.update();}
+ set hass(h){myhomeTheme(this);this.h=h;this.update();}
  getCardSize(){return this.c?.mode==='overview'?4:5;}
  getGridOptions(){return {columns:12,rows:'auto'};}
  valid(id){return this.h.states[id]&&!['unknown','unavailable',''].includes(this.h.states[id].state);}

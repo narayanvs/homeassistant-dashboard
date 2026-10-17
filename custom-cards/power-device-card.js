@@ -1,4 +1,5 @@
-import './device-art.js?rev=20261017';
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
+import './device-art.js?rev=20261017-light8';
 /* Compact monitored-plug card used by the Test dashboard. */
 class MyHomePowerDeviceCard extends HTMLElement {
   setConfig(config) {
@@ -8,7 +9,7 @@ class MyHomePowerDeviceCard extends HTMLElement {
     this._update();
   }
 
-  set hass(hass) { this._hass = hass; this._update(); }
+  set hass(hass) {myhomeTheme(this); this._hass = hass; this._update(); }
   getCardSize() { return 3; }
   getGridOptions() { return { columns: 12, rows: 3, min_columns: 6 }; }
   _state(id) { return this._hass?.states[id]; }

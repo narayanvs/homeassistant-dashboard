@@ -1,3 +1,4 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 (()=>{
 const TZ='Europe/Dublin',cache=new Map(),ranges={day:[7,14,30,90],week:[4,8,12],month:[3,6,12]};
 const day=t=>new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(t));
@@ -16,7 +17,7 @@ class GridHistory extends HTMLElement{
  getCardSize(){return 5;}
  connectedCallback(){this.observer=new IntersectionObserver(es=>{this.visible=es.some(e=>e.isIntersecting);if(this.visible)this.load();},{rootMargin:'100px'});this.observer.observe(this);}
  disconnectedCallback(){this.observer?.disconnect();this.generation++;this.loading=false;}
- set hass(h){this.h=h;if(this.visible)this.load();}
+ set hass(h){myhomeTheme(this);this.h=h;if(this.visible)this.load();}
  ids(){return {import:[this.config.import_statistic,this.config.reference_import],export:[this.config.export_statistic,this.config.reference_export]};}
  latest(){let ds=['import','export'].map(d=>this.h?.states['sensor.esb_meter_data_'+d+'_latest_complete_day']?.attributes?.latest_complete_day).filter(v=>/^\d{4}-\d{2}-\d{2}$/.test(v||''));return ds.length?ds.sort()[0]:null;}
  async load(force=false){

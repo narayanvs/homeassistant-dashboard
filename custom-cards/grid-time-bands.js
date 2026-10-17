@@ -1,3 +1,4 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 (()=>{
 const TZ='Europe/Dublin',cache=new Map(),bandKeys=['day','peak','night','ev'];
 const dayFmt=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'}),hourFmt=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',hourCycle:'h23',timeZone:TZ});
@@ -18,7 +19,7 @@ class TimeBands extends HTMLElement{
  getCardSize(){return 6;}
  connectedCallback(){this.observer=new IntersectionObserver(es=>{this.visible=es.some(e=>e.isIntersecting);if(this.visible)this.load();},{rootMargin:'100px'});this.observer.observe(this);}
  disconnectedCallback(){this.observer?.disconnect();this.generation++;this.loading=false;}
- set hass(h){this.h=h;const prices=JSON.stringify([this.rates(),this.exportRate()]);if(this.rateSig!==prices){this.rateSig=prices;this.render();}if(this.visible)this.load();}
+ set hass(h){myhomeTheme(this);this.h=h;const prices=JSON.stringify([this.rates(),this.exportRate()]);if(this.rateSig!==prices){this.rateSig=prices;this.render();}if(this.visible)this.load();}
  classifyHour(h){const c=this.config;return within(h,c.ev_start,c.ev_end)?'ev':within(h,c.peak_start,c.peak_end)?'peak':within(h,c.night_start,c.night_end)?'night':'day';}
  rates(){const entity=this.h?.states[this.config?.price_entity],result=Object.fromEntries(bandKeys.map(k=>[k,null]));if(!entity||!['c','c/kWh','ct/kWh'].includes(entity.attributes?.unit_of_measurement))return result;
   const sets=Object.fromEntries(bandKeys.map(k=>[k,new Set()])),today=day(Date.now());

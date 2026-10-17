@@ -1,3 +1,4 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 const PM_SERIES=[['solar','Solar','#f3cf67','sensor.sigen_plant_pv_power'],['battery','Battery','#61d7bf','sensor.sigen_plant_battery_power'],['load','Load','#ca88f7','sensor.sigen_plant_total_load_power'],['grid','Grid','#849dff','sensor.sigen_plant_grid_active_power'],['forecast','Forecast','#b5d8e0',null]];
 class MyHomePowerMetricsV4 extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this.enabled=new Set(PM_SERIES.map(s=>s[0]));this.rows={};this.at=0;}
@@ -5,7 +6,7 @@ class MyHomePowerMetricsV4 extends HTMLElement{
  this.shadowRoot.querySelectorAll('button').forEach(b=>b.onclick=()=>{const k=b.dataset.key;this.enabled.has(k)?this.enabled.delete(k):this.enabled.add(k);this.render();});const svg=this.shadowRoot.querySelector('svg');svg.onclick=e=>this.inspect(e);svg.onpointermove=e=>{if(e.pointerType==='mouse')this.inspect(e);};svg.onpointerleave=()=>{this.cursor=null;this.values();this.shadowRoot.querySelector('#cursor')?.setAttribute('visibility','hidden');};}
  connectedCallback(){this.io=new IntersectionObserver(es=>{this.visible=es[0].isIntersecting;if(this.visible){this.render();this.load();}},{rootMargin:'100px'});this.io.observe(this);}
  disconnectedCallback(){this.io?.disconnect();}
- set hass(h){this.h=h;if(this.visible){this.load();}}
+ set hass(h){myhomeTheme(this);this.h=h;if(this.visible){this.load();}}
  time(t){return new Intl.DateTimeFormat('en-GB',{timeZone:this.h?.config?.time_zone||'Europe/Dublin',hour:'2-digit',minute:'2-digit'}).format(t);}
  forecast(){return(this.h?.states['sensor.solcast_pv_forecast_forecast_today']?.attributes.detailedForecast||[]).filter(p=>p.pv_estimate!=null).map(p=>({t:Date.parse(p.period_start),v:Number(p.pv_estimate)})).filter(p=>Number.isFinite(p.t)&&Number.isFinite(p.v));}
  async load(){if(!this.h||this.pending||!this.visible)return;const f=this.forecast();if(!f.length){this.render();return;}const start=f[0].t;if(this.start===start&&Date.now()-this.at<300000)return;this.start=start;this.end=f.at(-1).t+1800000;this.pending=true;try{const data=await this.h.callWS({type:'recorder/statistics_during_period',start_time:new Date(start).toISOString(),end_time:new Date().toISOString(),statistic_ids:PM_SERIES.filter(s=>s[3]).map(s=>s[3]),period:'5minute',types:['mean'],units:{power:'kW'}});this.rows={};for(const s of PM_SERIES.filter(s=>s[3]))this.rows[s[0]]=(data[s[3]]||[]).filter(p=>Number.isFinite(p.mean)).map(p=>({t:Number(p.start),v:['battery','load'].includes(s[0])?-p.mean:p.mean}));this.error='';}catch{this.error='Power history unavailable';}finally{this.at=Date.now();this.pending=false;this.render();}}

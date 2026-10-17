@@ -1,9 +1,10 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 (()=>{
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 class ActiveAppliances extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'})}
  setConfig(c){this.config=c;this.update()}
- set hass(h){this.h=h;this.update()}
+ set hass(h){myhomeTheme(this);this.h=h;this.update()}
  connectedCallback(){this.timer=setInterval(()=>this.update(),60000)}disconnectedCallback(){clearInterval(this.timer)}
  getCardSize(){return 2}getGridOptions(){return {columns:12,rows:'auto'}}
  update(){if(!this.config||!this.h)return;const list=this.config.appliances.filter(a=>a.running_states.includes(this.h.states[a.status]?.state));this.style.display=list.length?'block':'none';if(!list.length)return;

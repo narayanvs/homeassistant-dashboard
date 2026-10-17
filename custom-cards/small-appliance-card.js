@@ -1,8 +1,9 @@
-import './device-art.js?rev=20261017';
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
+import './device-art.js?rev=20261017-light8';
 /* MyHome companion appliance cards. Original SVG/CSS, for kettle and extractor. */
 class MyHomeSmallApplianceCard extends HTMLElement {
   setConfig(c) { if (!c.power_entity || !c.status_entity) throw new Error("Power and status entities are required"); this._config=c; this._built=false; if(this._hass)this._render(); }
-  set hass(h) { this._hass=h; this._render(); }
+  set hass(h) {myhomeTheme(this); this._hass=h; this._render(); }
   connectedCallback(){this._timer=setInterval(()=>this._update(),1000);}
   disconnectedCallback(){clearInterval(this._timer);}
   getCardSize(){return 5;}

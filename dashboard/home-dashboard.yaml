@@ -6082,6 +6082,175 @@
               "view": "energy"
             },
             {
+              "type": "custom:button-card",
+              "name": "Energy",
+              "label": "Solar, storage & your home",
+              "show_label": true,
+              "show_icon": false,
+              "tap_action": {
+                "action": "none"
+              },
+              "triggers_update": [],
+              "custom_fields": {
+                "art": "<img src=\"/local/myhome-dashboard-banners/energy-v2.png\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:65% center;opacity:1;border-radius:24px 24px 0 0;mask-image:linear-gradient(to bottom,black 0%,black 50%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,black 0%,black 50%,transparent 100%);\">",
+                "back": {
+                  "card": {
+                    "type": "custom:button-card",
+                    "icon": "mdi:arrow-left",
+                    "show_name": false,
+                    "tooltip": "Back to Home",
+                    "tap_action": {
+                      "action": "navigate",
+                      "navigation_path": "/dashboard-myhome/home"
+                    },
+                    "styles": {
+                      "card": [
+                        {
+                          "width": "44px"
+                        },
+                        {
+                          "height": "44px"
+                        },
+                        {
+                          "border-radius": "50%"
+                        },
+                        {
+                          "padding": "11px"
+                        },
+                        {
+                          "background": "color-mix(in srgb,var(--card-background-color) 70%,transparent)"
+                        },
+                        {
+                          "border": "1px solid color-mix(in srgb,var(--primary-text-color) 8%,transparent)"
+                        },
+                        {
+                          "box-shadow": "none"
+                        }
+                      ],
+                      "icon": [
+                        {
+                          "width": "20px"
+                        },
+                        {
+                          "color": "var(--primary-text-color)"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "styles": {
+                "card": [
+                  {
+                    "height": "235px"
+                  },
+                  {
+                    "padding": "10px 20px 28px"
+                  },
+                  {
+                    "background": "transparent!important"
+                  },
+                  {
+                    "border": "none!important"
+                  },
+                  {
+                    "box-shadow": "none!important"
+                  },
+                  {
+                    "border-radius": "24px 24px 0 0"
+                  },
+                  {
+                    "isolation": "isolate"
+                  },
+                  {
+                    "overflow": "hidden"
+                  }
+                ],
+                "grid": [
+                  {
+                    "grid-template-areas": "\"back .\" \". .\" \"n n\" \"l l\""
+                  },
+                  {
+                    "grid-template-columns": "44px 1fr"
+                  },
+                  {
+                    "grid-template-rows": "44px 1fr 38px 22px"
+                  }
+                ],
+                "name": [
+                  {
+                    "justify-self": "start"
+                  },
+                  {
+                    "font-size": "27px"
+                  },
+                  {
+                    "font-weight": "750"
+                  },
+                  {
+                    "letter-spacing": "-.8px"
+                  },
+                  {
+                    "z-index": "1"
+                  },
+                  {
+                    "color": "var(--primary-text-color)"
+                  }
+                ],
+                "label": [
+                  {
+                    "justify-self": "start"
+                  },
+                  {
+                    "font-size": "11px"
+                  },
+                  {
+                    "z-index": "1"
+                  },
+                  {
+                    "color": "var(--secondary-text-color)"
+                  }
+                ],
+                "custom_fields": {
+                  "art": [
+                    {
+                      "position": "absolute"
+                    },
+                    {
+                      "inset": "0"
+                    },
+                    {
+                      "z-index": "-1"
+                    },
+                    {
+                      "pointer-events": "none"
+                    },
+                    {
+                      "width": "100%"
+                    },
+                    {
+                      "height": "100%"
+                    }
+                  ],
+                  "back": [
+                    {
+                      "justify-self": "start"
+                    },
+                    {
+                      "align-self": "start"
+                    },
+                    {
+                      "z-index": "2"
+                    }
+                  ]
+                }
+              },
+              "grid_options": {
+                "columns": "full",
+                "rows": "auto"
+              }
+            },
+            {
               "type": "custom:myhome-energy-fold-v1",
               "mode": "controls",
               "grid_options": {
@@ -6099,7 +6268,8 @@
                 "home_path": "/dashboard-myhome/home",
                 "grid_options": {
                   "columns": "full"
-                }
+                },
+                "separate_header": true
               },
               "grid_options": {
                 "columns": "full",
@@ -7191,7 +7361,7 @@
                     }
                   ],
                   "card_mod": {
-                    "style": "ha-card { background:transparent!important; border:0!important; border-radius:24px!important; box-shadow:none!important; overflow:hidden; } hui-image { mask-image:radial-gradient(ellipse at 56% 43%,black 32%,transparent 76%); -webkit-mask-image:radial-gradient(ellipse at 56% 43%,black 32%,transparent 76%); }"
+                    "style": "ha-card { background:transparent!important; border:0!important; border-radius:24px!important; box-shadow:none!important; overflow:hidden; } hui-image { mask-image:var(--myhome-banner-mask,radial-gradient(ellipse at 56% 43%,black 32%,transparent 76%)); -webkit-mask-image:var(--myhome-banner-mask,radial-gradient(ellipse at 56% 43%,black 32%,transparent 76%)); } hui-image { filter:var(--myhome-banner-filter,none); }"
                   }
                 },
                 {
@@ -10824,7 +10994,7 @@
                           }
                         },
                         "custom_fields": {
-                          "b": "[[[ var s=(entity&&entity.state)?entity.state:''; var lbl=s; var m=s.match(/(\\d{2})\\.(\\d{2})\\.(\\d{4})/); if(m){var due=new Date(+m[3],+m[2]-1,+m[1]);var now=new Date();now.setHours(0,0,0,0);due.setHours(0,0,0,0);var dd=Math.round((due-now)/86400000);lbl=dd<=0?'Today':(dd==1?'Tomorrow':'in '+dd+' days');} return \"<div style='display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:130px;'>\"+\"<img src='/local/myhome-house-icons/recycling.png' style=\\\"height:74px;width:auto;object-fit:contain;display:block;\\\"/>\"+\"<span style='color:var(--primary-text-color);font-weight:600;font-size:14px;'>Green Bin</span>\"+\"<span style='color:var(--secondary-text-color);font-size:12px;'>\"+lbl+\"</span>\"+\"</div>\"; ]]]"
+                          "b": "[[[ var s=(entity&&entity.state)?entity.state:''; var lbl=s; var m=s.match(/(\\d{2})\\.(\\d{2})\\.(\\d{4})/); if(m){var due=new Date(+m[3],+m[2]-1,+m[1]);var now=new Date();now.setHours(0,0,0,0);due.setHours(0,0,0,0);var dd=Math.round((due-now)/86400000);lbl=dd<=0?'Today':(dd==1?'Tomorrow':'in '+dd+' days');} return \"<div style='display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:130px;'>\"+\"<img src='/local/images/shared/bin-1.png' style=\\\"height:74px;width:auto;object-fit:contain;display:block;\\\"/>\"+\"<span style='color:var(--primary-text-color);font-weight:600;font-size:14px;'>Green Bin</span>\"+\"<span style='color:var(--secondary-text-color);font-size:12px;'>\"+lbl+\"</span>\"+\"</div>\"; ]]]"
                         },
                         "card_mod": {
                           "style": "\nha-card { background:linear-gradient(110deg, color-mix(in srgb, var(--card-background-color) 45%, transparent), transparent)!important;box-shadow:none!important; }\nha-card {border:0!important;border-radius:20px!important;}\n/* Subtle outer preset frame */\nha-card{border:1px solid color-mix(in srgb,var(--myhome-accent,#d5ab6c) 13%,transparent)!important;border-top:2px solid color-mix(in srgb,var(--myhome-accent,#d5ab6c) 30%,transparent)!important;}\n"
@@ -10865,7 +11035,7 @@
                           }
                         },
                         "custom_fields": {
-                          "b": "[[[ var s=(entity&&entity.state)?entity.state:''; var lbl=s; var m=s.match(/(\\d{2})\\.(\\d{2})\\.(\\d{4})/); if(m){var due=new Date(+m[3],+m[2]-1,+m[1]);var now=new Date();now.setHours(0,0,0,0);due.setHours(0,0,0,0);var dd=Math.round((due-now)/86400000);lbl=dd<=0?'Today':(dd==1?'Tomorrow':'in '+dd+' days');} return \"<div style='display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:130px;'>\"+\"<img src='/local/myhome-house-icons/general-waste.png' style=\\\"height:74px;width:auto;object-fit:contain;display:block;\\\"/>\"+\"<span style='color:var(--primary-text-color);font-weight:600;font-size:14px;'>Brown Bin</span>\"+\"<span style='color:var(--secondary-text-color);font-size:12px;'>\"+lbl+\"</span>\"+\"</div>\"; ]]]"
+                          "b": "[[[ var s=(entity&&entity.state)?entity.state:''; var lbl=s; var m=s.match(/(\\d{2})\\.(\\d{2})\\.(\\d{4})/); if(m){var due=new Date(+m[3],+m[2]-1,+m[1]);var now=new Date();now.setHours(0,0,0,0);due.setHours(0,0,0,0);var dd=Math.round((due-now)/86400000);lbl=dd<=0?'Today':(dd==1?'Tomorrow':'in '+dd+' days');} return \"<div style='display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:130px;'>\"+\"<img src='/local/images/shared/bin-2.png' style=\\\"height:74px;width:auto;object-fit:contain;display:block;\\\"/>\"+\"<span style='color:var(--primary-text-color);font-weight:600;font-size:14px;'>Brown Bin</span>\"+\"<span style='color:var(--secondary-text-color);font-size:12px;'>\"+lbl+\"</span>\"+\"</div>\"; ]]]"
                         },
                         "card_mod": {
                           "style": "\nha-card { background:linear-gradient(110deg, color-mix(in srgb, var(--card-background-color) 45%, transparent), transparent)!important;box-shadow:none!important; }\nha-card {border:0!important;border-radius:20px!important;}\n/* Subtle outer preset frame */\nha-card{border:1px solid color-mix(in srgb,var(--myhome-accent,#d5ab6c) 13%,transparent)!important;border-top:2px solid color-mix(in srgb,var(--myhome-accent,#d5ab6c) 30%,transparent)!important;}\n"
@@ -10906,7 +11076,7 @@
                           }
                         },
                         "custom_fields": {
-                          "b": "[[[ var s=(entity&&entity.state)?entity.state:''; var lbl=s; var m=s.match(/(\\d{2})\\.(\\d{2})\\.(\\d{4})/); if(m){var due=new Date(+m[3],+m[2]-1,+m[1]);var now=new Date();now.setHours(0,0,0,0);due.setHours(0,0,0,0);var dd=Math.round((due-now)/86400000);lbl=dd<=0?'Today':(dd==1?'Tomorrow':'in '+dd+' days');} return \"<div style='display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:130px;'>\"+\"<img src='/local/myhome-house-icons/waste-inactive.png' style=\\\"height:74px;width:auto;object-fit:contain;display:block;\\\"/>\"+\"<span style='color:var(--primary-text-color);font-weight:600;font-size:14px;'>Black Bin</span>\"+\"<span style='color:var(--secondary-text-color);font-size:12px;'>\"+lbl+\"</span>\"+\"</div>\"; ]]]"
+                          "b": "[[[ var s=(entity&&entity.state)?entity.state:''; var lbl=s; var m=s.match(/(\\d{2})\\.(\\d{2})\\.(\\d{4})/); if(m){var due=new Date(+m[3],+m[2]-1,+m[1]);var now=new Date();now.setHours(0,0,0,0);due.setHours(0,0,0,0);var dd=Math.round((due-now)/86400000);lbl=dd<=0?'Today':(dd==1?'Tomorrow':'in '+dd+' days');} return \"<div style='display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;height:130px;'>\"+\"<img src='/local/images/shared/bin-3.png' style=\\\"height:74px;width:auto;object-fit:contain;display:block;\\\"/>\"+\"<span style='color:var(--primary-text-color);font-weight:600;font-size:14px;'>Black Bin</span>\"+\"<span style='color:var(--secondary-text-color);font-size:12px;'>\"+lbl+\"</span>\"+\"</div>\"; ]]]"
                         },
                         "card_mod": {
                           "style": "\nha-card { background:linear-gradient(110deg, color-mix(in srgb, var(--card-background-color) 45%, transparent), transparent)!important;box-shadow:none!important; }\nha-card {border:0!important;border-radius:20px!important;}\n/* Subtle outer preset frame */\nha-card{border:1px solid color-mix(in srgb,var(--myhome-accent,#d5ab6c) 13%,transparent)!important;border-top:2px solid color-mix(in srgb,var(--myhome-accent,#d5ab6c) 30%,transparent)!important;}\n"
@@ -15465,7 +15635,7 @@
                 "binary_sensor.kitchen_kitchen_extractor_myhome_extractor_drawing_power"
               ],
               "custom_fields": {
-                "art": "<img src=\"/local/myhome-rooms-v3/kitchen_store.png\" alt=\"\" style=\"width:100%;height:100%;object-fit:cover;object-position:center 65%;opacity:.72;mask-image:linear-gradient(to bottom,transparent 0%,black 12%,black 55%,transparent 100%),linear-gradient(to right,transparent 0%,black 45%,black 90%,transparent);mask-composite:intersect;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 12%,black 55%,transparent 100%),linear-gradient(to right,transparent 0%,black 45%,black 90%,transparent);-webkit-mask-composite:source-in;\">",
+                "art": "<img src=\"/local/myhome-rooms-v3/kitchen_store.png\" alt=\"\" style=\"display:block;width:100%;height:100%;object-fit:cover;object-position:center 65%;opacity:1;border-radius:24px 24px 0 0;mask-image:linear-gradient(to bottom,black 0%,black 50%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,black 0%,black 50%,transparent 100%);\">",
                 "back": {
                   "card": {
                     "type": "custom:button-card",
@@ -15530,7 +15700,7 @@
                     "box-shadow": "none!important"
                   },
                   {
-                    "border-radius": "0"
+                    "border-radius": "24px 24px 0 0"
                   },
                   {
                     "isolation": "isolate"

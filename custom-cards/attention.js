@@ -1,3 +1,4 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 
 (() => {
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -7,7 +8,7 @@ const cache=new Map();
 class Useful extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});try{this.dismissed=new Set(JSON.parse(localStorage.getItem('myhome.attention.dismissed.v1')||'[]'));}catch(e){this.dismissed=new Set();}this.full=false;this.history=null;this.shadowRoot.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.collect){this.h.callService('input_boolean','turn_off',{entity_id:b.dataset.collect});}else if(b.dataset.dismiss){this.dismissed.add(b.dataset.dismiss);try{localStorage.setItem('myhome.attention.dismissed.v1',JSON.stringify([...this.dismissed].slice(-20)));}catch(e){}this.render();}else if(b.dataset.entity)this.dispatchEvent(new CustomEvent('hass-more-info',{detail:{entityId:b.dataset.entity},bubbles:true,composed:true}));else if(b.dataset.more){this.full=!this.full;this.render();}});}
  setConfig(c){this.config=c;}
- set hass(h){this.h=h;this.render();if(this.visible)this.load();}
+ set hass(h){myhomeTheme(this);this.h=h;this.render();if(this.visible)this.load();}
  connectedCallback(){this.observer=new IntersectionObserver(es=>{this.visible=es[0].isIntersecting;if(this.visible)this.load();},{rootMargin:'100px'});this.observer.observe(this);}
  disconnectedCallback(){this.observer?.disconnect();clearTimeout(this.tick);}
  getCardSize(){return this.config?.mode==='attention'?1:5;}

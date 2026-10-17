@@ -1,3 +1,4 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 const ES_SERIES=[
  {key:'solar',label:'Solar',color:'#e7ce6e',daily:'daily_pv_energy',total:'total_pv_generation'},
  {key:'home',label:'Home',color:'#bb95ec',daily:'daily_load_consumption',total:'total_load_consumption'},
@@ -13,7 +14,7 @@ function esMidnight(day,tz){const [y,m,d]=day.split('-').map(Number),target=Date
 class MyHomeEnergyStatisticsV13 extends HTMLElement {
  constructor(){super();this.attachShadow({mode:'open'});this.mode='day';this.enabled=new Set(['solar','home','import','export']);this.cache=new Map();this.seq=0;this.visible=false;}
  setConfig(c){this.config=c;if(this.built)return;this.built=true;this.build();}
- set hass(h){this._hass=h;this.tz=h.config?.time_zone||'Europe/Dublin';if(!this.date)this.date=esDate(Date.now(),this.tz);if(this.visible&&!this.started)this.load();else if(this.visible&&(this.mode==='total'||this.isToday()))this.paintTotals();}
+ set hass(h){myhomeTheme(this);this._hass=h;this.tz=h.config?.time_zone||'Europe/Dublin';if(!this.date)this.date=esDate(Date.now(),this.tz);if(this.visible&&!this.started)this.load();else if(this.visible&&(this.mode==='total'||this.isToday()))this.paintTotals();}
  connectedCallback(){this.io=new IntersectionObserver(e=>{this.visible=e[0].isIntersecting;if(this.visible&&this._hass&&!this.started)this.load();},{rootMargin:'160px'});this.io.observe(this);this.refreshTimer=setInterval(()=>{if(this.visible&&this._hass)this.load();},300000);}
  disconnectedCallback(){clearInterval(this.refreshTimer);this.io?.disconnect();++this.seq;this.started=false;}
  getCardSize(){return 10;}getGridOptions(){return{columns:'full',rows:'auto'};}

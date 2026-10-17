@@ -1,3 +1,4 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 (() => {
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))?Number(v):null;
@@ -7,7 +8,7 @@ const css=`
 class ThermalStudio extends HTMLElement{
 constructor(){super();this.attachShadow({mode:'open'});this.index=0;this.filter='all';this.history={};this.lastFetch=0;this.pending=false;this.error='';this.rangeHours=24;this.shadowRoot.addEventListener('pointermove',e=>this.inspect(e));this.shadowRoot.addEventListener('pointerdown',e=>this.inspect(e));this.shadowRoot.addEventListener('pointerleave',()=>this.clearInspect());this.shadowRoot.addEventListener('pointerup',e=>{if(e.pointerType==='touch')setTimeout(()=>this.clearInspect(),1800)});this.shadowRoot.addEventListener('click',e=>this.click(e));this.shadowRoot.addEventListener('change',e=>this.change(e));}
 setConfig(c){if(!c.rooms?.length)throw Error('Rooms required');this.config=c;this.ids=[...new Set(c.rooms.flatMap(r=>[r.temp,r.humidity,r.presence,r.rise,r.fall,r.climate]).filter(Boolean))];this.shadowRoot.innerHTML='<style>'+css+'</style><ha-card><div id="body"></div></ha-card>';this.render();}
-set hass(h){this.h=h;if(!this.config)return;const sig=JSON.stringify(this.ids.map(id=>h.states[id]));if(sig!==this.sig){this.sig=sig;if(!this.pending&&!['INPUT','SELECT'].includes(this.shadowRoot.activeElement?.tagName))this.render();}if(this.visible)this.load();}
+set hass(h){myhomeTheme(this);this.h=h;if(!this.config)return;const sig=JSON.stringify(this.ids.map(id=>h.states[id]));if(sig!==this.sig){this.sig=sig;if(!this.pending&&!['INPUT','SELECT'].includes(this.shadowRoot.activeElement?.tagName))this.render();}if(this.visible)this.load();}
 connectedCallback(){this.io?.disconnect();this.io=new IntersectionObserver(es=>{this.visible=es.some(e=>e.isIntersecting);if(this.visible)this.load();},{rootMargin:'120px'});this.io.observe(this);clearInterval(this.timer);this.timer=setInterval(()=>{if(this.visible&&!document.hidden)this.load();},60000);}
 disconnectedCallback(){this.io?.disconnect();clearInterval(this.timer);}
 getCardSize(){return this.config?.mode==='history'?12:this.config?.compact?3:6;}

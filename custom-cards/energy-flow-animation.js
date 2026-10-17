@@ -1,4 +1,4 @@
-import './energy-flow-colours.js?rev=20261017';
+import './energy-flow-colours.js?rev=20261017-light8';
 function roundedRoute(d){if(/[CQ]/i.test(d))return d;const nums=d.match(/-?\d+(?:\.\d+)?/g)?.map(Number);if(!nums||nums.length%2)return d;const p=[];for(let i=0;i<nums.length;i+=2)p.push([nums[i],nums[i+1]]);if(p.length<3)return d;let out=`M${p[0].join(' ')}`;for(let i=1;i<p.length-1;i++){const[a,b,c]=[p[i-1],p[i],p[i+1]],u=Math.hypot(b[0]-a[0],b[1]-a[1]),v=Math.hypot(c[0]-b[0],c[1]-b[1]),r=Math.min(24,u*.32,v*.32);if(!u||!v)continue;const before=[b[0]+(a[0]-b[0])*r/u,b[1]+(a[1]-b[1])*r/u],after=[b[0]+(c[0]-b[0])*r/v,b[1]+(c[1]-b[1])*r/v];out+=` L${before.join(' ')} Q${b.join(' ')} ${after.join(' ')}`;}return out+` L${p.at(-1).join(' ')}`;}
 const comet=Base=>class extends Base {
  _build(){super._build();const style=document.createElement('style');style.textContent=`

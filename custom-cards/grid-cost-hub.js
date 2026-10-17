@@ -1,10 +1,11 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 (()=>{
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=v=>v===null?'—':v.toLocaleString('en-IE',{style:'currency',currency:'EUR'});
 class CostHub extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this.tab='meter';this.cards={};this.token=0;this.pending=new Set();this.observers=[];}
  setConfig(c){if(!c.meter_card||!c.tracking_graph)throw Error('Meter and tracking graph required');this.config=c;this.cards={};this.token++;this.build();}
- set hass(h){this.h=h;for(const card of Object.values(this.cards))card.hass=h;this.update();}
+ set hass(h){myhomeTheme(this);this.h=h;for(const card of Object.values(this.cards))card.hass=h;this.update();}
  connectedCallback(){for(const card of Object.values(this.cards))this.flatten(card);}
  disconnectedCallback(){for(const observer of this.observers)observer.disconnect();this.observers=[];}
  getCardSize(){return 7;}

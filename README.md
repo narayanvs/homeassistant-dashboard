@@ -62,7 +62,7 @@ the cards you like. There is no installer or automatic setup wizard.
    HACS. Their `/hacsfiles/` URLs are references; vendor code is not bundled.
    **washing-machine-card** is required by the appliance wrappers.
 2. Copy `custom-cards/` to `/config/www/custom-cards/`. Register one JavaScript
-   Module resource: `/local/custom-cards/myhome-dashboard.js?rev=20261017`. It imports the
+   Module resource: `/local/custom-cards/myhome-dashboard.js?rev=20261017-light8`. It imports the
    custom modules and their dependencies. Use the resource list as a checklist;
    do not replace your existing resource registry.
 3. Copy the contents of `images/` into `/config/www/`, preserving the directories
@@ -158,7 +158,7 @@ A card type such as `custom:myhome-preset-live-v1` is a JavaScript element name,
 **not a file to download with that name**. This one is defined in
 `custom-cards/appearance-presets.js` and inherits the house scene from other
 modules. Copy the entire `custom-cards/` folder and register the single entry
-point `/local/custom-cards/myhome-dashboard.js?rev=20261017`, after installing the
+point `/local/custom-cards/myhome-dashboard.js?rev=20261017-light8`, after installing the
 third-party prerequisites. Loading only one file may leave its parent missing.
 
 If you already copied an older export, update the whole folder, check that the
@@ -179,7 +179,10 @@ bundled card type used by the dashboard has a provider reachable from the loader
 
 JS filenames are stable, without version suffixes; custom-element identifiers keep
 versions for compatibility. All local import paths resolve within the bundle. Resource and import URLs share
-`?rev=20261017` for cache invalidation; keep these in step when updating files.
+`?rev=20261017-light8` for cache invalidation; keep these in step when updating files.
+Do not load the entry point alongside separately registered copies with different
+revision URLs. The URL revision is not part of the filename. Resource and import URLs share
+`?rev=20261017-light8` for cache invalidation; keep these in step when updating files.
 Do not load the entry point alongside separately registered copies with different
 revision URLs. The URL revision is not part of the filename.
 The image assets include house variants, cloud texture, transparent car artwork,
@@ -215,3 +218,11 @@ file in a new commit does not remove its old versions from Git history.
 
 Shared as-is for reference. Adapt freely to your own Home Assistant setup.
 Third-party cards retain their respective licenses and are installed separately.
+
+### Light and dark appearance
+
+Daylight house artwork, readable weather effects, clearer room tiles and stronger
+energy/chart colours adapt to the active Home Assistant theme. Page banners have
+rounded tops and a faded bottom. Dark artwork and reduced-motion support are retained.
+
+See the [light-mode screenshots](docs/gallery.md#light-mode--reference-dashboard).

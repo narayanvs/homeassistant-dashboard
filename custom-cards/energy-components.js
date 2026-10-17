@@ -1,3 +1,4 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 const EN_ESC=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const EN_IDS={solar:'sensor.sigen_plant_pv_power',home:'sensor.sigen_plant_total_load_power',battery:'sensor.sigen_plant_battery_power',soc:'sensor.sigen_plant_battery_state_of_charge',import:'sensor.sigen_plant_grid_import_power',export:'sensor.sigen_plant_grid_export_power',ev:'sensor.zappi_myenergi_zappi_power_charging',solarDay:'sensor.sigen_plant_daily_pv_energy',homeDay:'sensor.sigen_plant_daily_load_consumption',importDay:'sensor.sigen_plant_daily_grid_import_energy',exportDay:'sensor.sigen_plant_daily_grid_export_energy',chargeDay:'sensor.sigen_plant_daily_battery_charge_energy',dischargeDay:'sensor.sigen_plant_daily_battery_discharge_energy',evDay:'sensor.zappi_00000000_myenergi_zappi_00000000_energy_used_today',plug:'sensor.zappi_00000000_myenergi_zappi_00000000_plug_status',mode:'sensor.sigen_plant_ems_work_mode',temperature:'sensor.sigen_plant_ess_average_cell_temperature',self:'sensor.myhome_self_sufficiency',consumption:'sensor.myhome_self_consumption',cost:'sensor.myhome_grid_import_cost_today',credit:'sensor.myhome_grid_export_credit_today',net:'sensor.myhome_net_balance_today',forecast:'sensor.solcast_pv_forecast_forecast_today',remaining:'sensor.solcast_pv_forecast_forecast_remaining_today',tomorrow:'sensor.solcast_pv_forecast_forecast_tomorrow'};
 const EN_GLYPHS={solar:'M3 8h18l2 11H1ZM8 8 6 19m10-11 2 11M2 14h20M12 8v11m-5 4h10m-5-4v4M12 1v3m-6-2 2 2m10-2-2 2',grid:'M12 2 5 22m7-20 7 20M8 8h8M6 14h12M3 8h18M5 14l14 8M19 14 5 22',battery:'M9 3V2h6v2M5 3h14v19H5ZM8 7h8M8 11h8M8 15h8M8 19h8',ev:'M4 16H2V9l3-6h14l3 6v7h-2M5 3 3 9h18M4 16h16M5 16v5H2v-5m20 0v5h-3v-5M5 12h2m10 0h2',home:'M2 10 12 2l10 8M5 8v14h14V8M10 22v-7h4v7M8 11h.01m8 0h.01',arrow:'M7 17 17 7M7 7h10v10',back:'M19 12H5m6-6-6 6 6 6',leaf:'M4 20 18 6M5 18C1 6 12 3 21 3c0 10-5 18-16 15',refresh:'M20 7v5h-5M6 7a7 7 0 1 1-2 6',info:'M12 11v6m0-10h.01M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0'};
@@ -9,7 +10,7 @@ const EN_CSS=EN_BASE_CSS+`:host{--solar:#f4be57;--home:#62bbf0;--grid:#b896f1;--
 class MyHomeEnergyNexusV2 extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this.mode='now';this.selected='home';}
  setConfig(c){this.config=c;this.build();this.update();}
- set hass(h){this._hass=h;this.update();}
+ set hass(h){myhomeTheme(this);this._hass=h;this.update();}
  connectedCallback(){this.io=new IntersectionObserver(e=>this.classList.toggle('offscreen',!e[0].isIntersecting));this.io.observe(this);}
  disconnectedCallback(){this.io?.disconnect();}
  getGridOptions(){return{columns:'full',rows:'auto'};}

@@ -1,10 +1,11 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 (()=>{
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))?Number(v):null;
 class Insights extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this.mode='power';this.power=[];this.shadowRoot.addEventListener('click',e=>{const saving=e.target.closest('[data-saving]');if(saving){this.h.callService('input_boolean','toggle',{entity_id:'input_boolean.myhome_energy_suggestions'}).catch(()=>{});return;}const toggle=e.target.closest('[data-mode]');if(toggle){this.mode=toggle.dataset.mode;this.selected=null;this.render();this.load();return;}const b=e.target.closest('[data-hour]');if(b){this.selected=this.selected===Number(b.dataset.hour)?null:Number(b.dataset.hour);this.render();}});}
  setConfig(c){this.config=c;}
- set hass(h){this.h=h;this.render();if(this.visible)this.load();}
+ set hass(h){myhomeTheme(this);this.h=h;this.render();if(this.visible)this.load();}
  connectedCallback(){this.observer=new IntersectionObserver(es=>{this.visible=es[0].isIntersecting;if(this.visible)this.load();},{rootMargin:"100px"});this.observer.observe(this);}
  disconnectedCallback(){this.observer?.disconnect();}
  async load(){if(!this.h||this.loading||!this.visible||this.mode!=="power"||Date.now()-(this.fetched||0)<300000)return;this.loading=true;try{const start=new Date();start.setHours(0,0,0,0);const id="sensor.sigen_plant_total_load_power";const r=await this.h.callWS({type:"recorder/statistics_during_period",start_time:start.toISOString(),end_time:new Date().toISOString(),statistic_ids:[id],period:"5minute",types:["mean"]});this.power=(r[id]||[]).filter(p=>num(p.mean)!==null&&p.mean>=0).map(p=>{const d=new Date(p.start);return {hour:d.getHours()+d.getMinutes()/60,v:Number(p.mean),t:Number(p.start)};});this.error=false;}catch(e){this.error=true;}finally{this.fetched=Date.now();this.loading=false;this.render();}}

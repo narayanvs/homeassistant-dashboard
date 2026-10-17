@@ -1,8 +1,9 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 /* Keep chart DOM/height stable; only forward relevant entity updates while visible. */
 class MyHomeDeferredGraphV2 extends HTMLElement {
  constructor(){super();this.attachShadow({mode:'open'});this.loaded=false;this.loading=false;this.visible=false;this.refs=new Map();}
  setConfig(c){if(!c.card)throw Error('Graph configuration required');if(this.config&&JSON.stringify(c)===JSON.stringify(this.config))return;this.config=c;this.ids=new Set();const scan=x=>{if(typeof x==='string'&&/^(sensor|binary_sensor|input_number|input_boolean|counter|weather)\.[a-z0-9_]+$/.test(x))this.ids.add(x);else if(x&&typeof x==='object')Object.values(x).forEach(scan);};scan(c.card);this.loaded=false;this.child=null;this.refs.clear();this.shadowRoot.innerHTML=`<style>:host{display:block;min-height:${Number(c.height)||220}px;overflow-anchor:none}.waiting{padding:16px;font:12px var(--primary-font-family,system-ui);color:var(--secondary-text-color);border-radius:20px;background:linear-gradient(115deg,color-mix(in srgb,var(--card-background-color) 65%,transparent),transparent);min-height:${Number(c.height)||220}px;box-sizing:border-box}</style><div class="waiting"></div>`;this.shadowRoot.querySelector('.waiting').textContent=c.card.header?.title||c.card.name||'Trend';this.observe();}
- set hass(h){this._hass=h;if(this.child&&this.visible)this.forward();}
+ set hass(h){myhomeTheme(this);this._hass=h;if(this.child&&this.visible)this.forward();}
  forward(force=false){if(!this.child||!this._hass)return;const h=this._hass;let changed=force||!this.ids.size||this.theme!==h.themes||this.language!==h.language;for(const id of this.ids){const entity=h.states[id];if(this.refs.get(id)!==entity)changed=true;this.refs.set(id,entity);}this.theme=h.themes;this.language=h.language;if(changed)this.child.hass=h;}
  connectedCallback(){this.observe();}
  disconnectedCallback(){this.observer?.disconnect();this.cancel();this.visible=false;}

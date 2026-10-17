@@ -1,3 +1,4 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 (()=>{
 const A='sensor.sigen_plant_daily_pv_energy',F='sensor.myhome_solar_energy_prediction_today',D='input_datetime.myhome_solar_forecast_snapshot_date';
 const series=[{id:'solar',entity:A,name:'Generated',chip:'Solar',color:'#efc66e'},{id:'forecast',entity:F,name:'Predicted',chip:'Forecast',color:'#b4a0ed'},{id:'load',entity:'sensor.sigen_plant_daily_load_consumption',name:'Consumed',chip:'Consumed',color:'#ef91c8'},{id:'export',entity:'sensor.sigen_plant_daily_grid_export_energy',name:'Exported',chip:'Exported',color:'#62d4b4'},{id:'import',entity:'sensor.sigen_plant_daily_grid_import_energy',name:'Imported',chip:'Imported',color:'#79aaf7'}];
@@ -14,7 +15,7 @@ class EnergyComparison extends HTMLElement{
  setConfig(c){this.config=c;this.render();}
  connectedCallback(){this.observer=new IntersectionObserver(es=>{this.visible=es.some(e=>e.isIntersecting);if(this.visible)this.load();},{rootMargin:'150px'});this.observer.observe(this);}
  disconnectedCallback(){this.observer?.disconnect();this.generation=(this.generation||0)+1;}
- set hass(h){this.h=h;if(this.visible)this.load();}
+ set hass(h){myhomeTheme(this);this.h=h;if(this.visible)this.load();}
  getCardSize(){return 5;}
  async load(){
  if(!this.h||this.loading||Date.now()-this.loadedAt<300000)return;

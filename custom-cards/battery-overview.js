@@ -1,8 +1,9 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 (() => {
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 class Batteries extends HTMLElement {
  constructor(){super();this.attachShadow({mode:'open'});this.filter='all';this.shadowRoot.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.filter){this.filter=b.dataset.filter;this.render();}else if(b.dataset.entity)this.dispatchEvent(new CustomEvent('hass-more-info',{detail:{entityId:b.dataset.entity},bubbles:true,composed:true}));});}
- setConfig(c){this.config=c;this.render();}set hass(h){this.h=h;this.render();}getCardSize(){return 1;}getGridOptions(){return {columns:12,rows:'auto'};}
+ setConfig(c){this.config=c;this.render();}set hass(h){myhomeTheme(this);this.h=h;this.render();}getCardSize(){return 1;}getGridOptions(){return {columns:12,rows:'auto'};}
  rows(){return (this.config?.batteries||[]).map(b=>{const s=this.h.states[b.entity],binary=b.entity.startsWith('binary_sensor.');const n=s&&s.state.trim()!==''&&Number.isFinite(Number(s.state))?Number(s.state):null;const valid=binary?['on','off'].includes(s?.state):n!==null&&n>=0&&n<=100;const low=!b.rechargeable&&(s?.state==='on'||this.h.states[b.low_entity]?.state==='on'||valid&&!binary&&n<=20);return {...b,n,binary,valid,low,rank:low?0:!valid?1:2};}).sort((a,b)=>a.rank-b.rank||(a.n??101)-(b.n??101)||a.name.localeCompare(b.name));}
  render(){if(!this.h||!this.config)return;const rows=this.rows(),low=rows.filter(r=>r.low).length,missing=rows.filter(r=>!r.valid).length;const open=this.shadowRoot.querySelector('details')?.open||false,scroll=this.shadowRoot.querySelector('.list')?.scrollTop||0;const signature=JSON.stringify([rows,this.filter]);if(signature===this.signature)return;this.signature=signature;
  const shown=rows.filter(r=>this.filter==='all'||this.filter==='low'&&r.low||this.filter==='devices'&&!r.rechargeable||this.filter==='rechargeable'&&r.rechargeable);

@@ -1,8 +1,9 @@
-import './device-art.js?rev=20261017';
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
+import './device-art.js?rev=20261017-light8';
 class MyHomeDeferredGraphV1 extends HTMLElement {
  constructor(){super();this.attachShadow({mode:'open'});this.loaded=false;this.loading=false;}
  setConfig(c){if(!c.card)throw Error('Graph configuration required');if(this.config&&JSON.stringify(c)===JSON.stringify(this.config))return;this.config=c;this.shadowRoot.innerHTML=`<style>:host{display:block;min-height:${Number(c.height)||220}px;font-family:var(--myhome-font-family,Nunito,system-ui);color:var(--secondary-text-color)}.waiting{padding:16px;font-size:12px;background:linear-gradient(115deg,color-mix(in srgb,var(--card-background-color) 65%,transparent),transparent);border-radius:20px;min-height:${Number(c.height)||220}px;box-sizing:border-box}.waiting small{display:block;margin-top:10px;font-size:10px;opacity:.6}</style><div class='waiting'></div>`;this.shadowRoot.querySelector('.waiting').textContent=c.card.header?.title||c.card.name||'Trend';this.observe();}
- set hass(h){this._hass=h;if(this.child)this.child.hass=h;}
+ set hass(h){myhomeTheme(this);this._hass=h;if(this.child)this.child.hass=h;}
  connectedCallback(){this.observe();}
  disconnectedCallback(){this.observer?.disconnect();clearTimeout(this.timer);if(this.idle)window.cancelIdleCallback?.(this.idle);this.loading=false;}
  observe(){if(!this.isConnected||!this.config||this.loaded)return;this.observer?.disconnect();this.observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting))this.schedule();},{rootMargin:'40px'});this.observer.observe(this);}

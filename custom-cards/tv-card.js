@@ -1,4 +1,5 @@
-import './device-art.js?rev=20261017';
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
+import './device-art.js?rev=20261017-light8';
 /* Compact, theme-aware MyHome TV card for the Test dashboard. */
 class MyHomeTVCard extends HTMLElement {
   setConfig(config) {
@@ -9,7 +10,7 @@ class MyHomeTVCard extends HTMLElement {
     this._build();
     this._update();
   }
-  set hass(hass) {
+  set hass(hass) {myhomeTheme(this);
     this._hass = hass;
     if (this._player) this._player.hass = hass;
     this._update();

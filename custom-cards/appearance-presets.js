@@ -1,4 +1,5 @@
-import './font-preferences.js?rev=20261017';
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
+import './font-preferences.js?rev=20261017-light8';
 /* Live scene presets. Preferences stay on this browser and dashboard. */
 (()=>{const presets=[{id:'myhome',name:'MyHome',accent:'#85cbb3',house:'sigen',flow:'mint'},{id:'coastal',name:'Coastal',accent:'#80c5e2',house:'villa',flow:'cyan'},{id:'ember',name:'Ember',accent:'#d9b47c',house:'cottage',flow:'amber'},{id:'aurora',name:'Aurora',accent:'#b6a1df',house:'modern',flow:'multi'},{id:'rose',name:'Rose',accent:'#dca0b0',house:'modern',flow:'multi'},{id:'copper',name:'Copper',accent:'#ce967b',house:'cottage',flow:'amber'},{id:'lagoon',name:'Lagoon',accent:'#69bdb7',house:'villa',flow:'cyan'},{id:'twilight',name:'Twilight',accent:'#929fd8',house:'sigen',flow:'multi'}];
 customElements.whenDefined('myhome-quiet-live-v27').then(()=>{
@@ -75,7 +76,7 @@ if(!customElements.get('myhome-preset-live-v1'))customElements.define('myhome-pr
 
 (()=>{const colors={myhome:'#85cbb3',coastal:'#80c5e2',ember:'#d9b47c',aurora:'#b6a1df',rose:'#dca0b0',copper:'#ce967b',lagoon:'#69bdb7',twilight:'#929fd8'};
 class AccentScope extends HTMLElement{
- setConfig(){this.style.display='none';} set hass(v){} getCardSize(){return 0;}
+ setConfig(){this.style.display='none';} set hass(v){myhomeTheme(this);} getCardSize(){return 0;}
  connectedCallback(){this.style.display='none';this._listener=e=>this.apply(e.detail?.accent);window.addEventListener('myhome-live-accent',this._listener);let p;try{p=JSON.parse(localStorage.getItem('myhome.live.appearance.v1')||'null')}catch{}this.apply(colors[p?.preset]||null);}
  apply(accent){if(!this._view){let e=this;while(e){if(['HUI-VIEW','HUI-SECTIONS-VIEW'].includes(e.tagName)){this._view=e;break;}e=e.parentElement||e.getRootNode()?.host;}}if(!this._view)return;this.restore();if(!accent)return;this._original={};const values={'--myhome-accent':accent,'--myhome-accent-deep':`color-mix(in srgb, ${accent} 78%, #362a20)`,'--myhome-accent-soft':`color-mix(in srgb, ${accent} 72%, #ffffff)`,'--gold':accent,'--primary-color':accent,'--accent-color':accent};for(const[k,v]of Object.entries(values)){this._original[k]=this._view.style.getPropertyValue(k);this._view.style.setProperty(k,v);}}
  restore(){if(this._view&&this._original)for(const[k,v]of Object.entries(this._original))v?this._view.style.setProperty(k,v):this._view.style.removeProperty(k);this._original=null;}

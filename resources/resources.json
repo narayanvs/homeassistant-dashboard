@@ -76,235 +76,239 @@
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/accent-panels.js?rev=20261017",
+    "url": "/local/custom-cards/accent-panels.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/active-appliances.js?rev=20261017",
+    "url": "/local/custom-cards/active-appliances.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/appearance-presets.js?rev=20261017",
+    "url": "/local/custom-cards/appearance-presets.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/appliance-animation.js?rev=20261017",
+    "url": "/local/custom-cards/appliance-animation.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/appliance-cycle.js?rev=20261017",
+    "url": "/local/custom-cards/appliance-cycle.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/attention-legacy.js?rev=20261017",
+    "url": "/local/custom-cards/attention-legacy.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/attention.js?rev=20261017",
+    "url": "/local/custom-cards/attention.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/battery-overview.js?rev=20261017",
+    "url": "/local/custom-cards/battery-overview.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/climate-summary.js?rev=20261017",
+    "url": "/local/custom-cards/climate-summary.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/compact-overviews.js?rev=20261017",
+    "url": "/local/custom-cards/compact-overviews.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/cycle-card.js?rev=20261017",
+    "url": "/local/custom-cards/cycle-card.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/deferred-graph.js?rev=20261017",
+    "url": "/local/custom-cards/deferred-graph.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/device-art.js?rev=20261017",
+    "url": "/local/custom-cards/device-art.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/energy-components.js?rev=20261017",
+    "url": "/local/custom-cards/energy-components.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/energy-flow-animation.js?rev=20261017",
+    "url": "/local/custom-cards/energy-flow-animation.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/energy-flow-colours.js?rev=20261017",
+    "url": "/local/custom-cards/energy-flow-colours.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/energy-fold.js?rev=20261017",
+    "url": "/local/custom-cards/energy-fold.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/energy-health-balance.js?rev=20261017",
+    "url": "/local/custom-cards/energy-health-balance.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/energy-insights.js?rev=20261017",
+    "url": "/local/custom-cards/energy-insights.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/energy-overview-controls.js?rev=20261017",
+    "url": "/local/custom-cards/energy-overview-controls.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/energy-overview-core.js?rev=20261017",
+    "url": "/local/custom-cards/energy-overview-core.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/energy-overview.js?rev=20261017",
+    "url": "/local/custom-cards/energy-overview.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/energy-statistics.js?rev=20261017",
+    "url": "/local/custom-cards/energy-statistics.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/family-calendar.js?rev=20261017",
+    "url": "/local/custom-cards/family-calendar.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/floating-nav-icons.js?rev=20261017",
+    "url": "/local/custom-cards/floating-nav-icons.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/floating-nav.js?rev=20261017",
+    "url": "/local/custom-cards/floating-nav.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/floating-settings.js?rev=20261017",
+    "url": "/local/custom-cards/floating-settings.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/font-preferences.js?rev=20261017",
+    "url": "/local/custom-cards/font-preferences.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/grid-cost-hub.js?rev=20261017",
+    "url": "/local/custom-cards/grid-cost-hub.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/grid-meter-history.js?rev=20261017",
+    "url": "/local/custom-cards/grid-meter-history.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/grid-time-bands.js?rev=20261017",
+    "url": "/local/custom-cards/grid-time-bands.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/home-shortcuts.js?rev=20261017",
+    "url": "/local/custom-cards/home-shortcuts.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/house-checks.js?rev=20261017",
+    "url": "/local/custom-cards/house-checks.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/house-scene-base.js?rev=20261017",
+    "url": "/local/custom-cards/house-scene-base.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/house-scene-variant-base.js?rev=20261017",
+    "url": "/local/custom-cards/house-scene-variant-base.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/house-scene.js?rev=20261017",
+    "url": "/local/custom-cards/house-scene.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/house-temperature.js?rev=20261017",
+    "url": "/local/custom-cards/house-temperature.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/house-weather-variant.js?rev=20261017",
+    "url": "/local/custom-cards/house-weather-variant.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/house-weather.js?rev=20261017",
+    "url": "/local/custom-cards/house-weather.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/lab-console-rings.js?rev=20261017",
+    "url": "/local/custom-cards/lab-console-rings.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/lab-console.js?rev=20261017",
+    "url": "/local/custom-cards/lab-console.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/lab-speedtest.js?rev=20261017",
+    "url": "/local/custom-cards/lab-speedtest.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/lighting-mode-panel.js?rev=20261017",
+    "url": "/local/custom-cards/lighting-mode-panel.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/lighting-overview.js?rev=20261017",
+    "url": "/local/custom-cards/lighting-overview.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/outdoor-forecast.js?rev=20261017",
+    "url": "/local/custom-cards/outdoor-forecast.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/outdoor-weather.js?rev=20261017",
+    "url": "/local/custom-cards/outdoor-weather.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/power-device-card.js?rev=20261017",
+    "url": "/local/custom-cards/power-device-card.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/power-metrics.js?rev=20261017",
+    "url": "/local/custom-cards/power-metrics.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/room-climate.js?rev=20261017",
+    "url": "/local/custom-cards/room-climate.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/room-console.js?rev=20261017",
+    "url": "/local/custom-cards/room-console.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/security-feed.js?rev=20261017",
+    "url": "/local/custom-cards/security-feed.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/small-appliance-card.js?rev=20261017",
+    "url": "/local/custom-cards/small-appliance-card.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/solar-comparison.js?rev=20261017",
+    "url": "/local/custom-cards/solar-comparison.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/solar-outlook.js?rev=20261017",
+    "url": "/local/custom-cards/solar-outlook.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/supplier-gas.js?rev=20261017",
+    "url": "/local/custom-cards/supplier-gas.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/tesla-studio.js?rev=20261017",
+    "url": "/local/custom-cards/tesla-studio.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/tesla.js?rev=20261017",
+    "url": "/local/custom-cards/tesla.js?rev=20261017-light8",
     "type": "module"
   },
   {
-    "url": "/local/custom-cards/tv-card.js?rev=20261017",
+    "url": "/local/custom-cards/theme-mode.js?rev=20261017-light8",
+    "type": "module"
+  },
+  {
+    "url": "/local/custom-cards/tv-card.js?rev=20261017-light8",
     "type": "module"
   }
 ]

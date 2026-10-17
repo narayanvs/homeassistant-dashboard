@@ -1,9 +1,10 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 /* Compact, read-only health checks and existing timer controls. */
 (()=>{
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 class HouseChecks extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this.shadowRoot.addEventListener('click',e=>this.click(e));}
- setConfig(c){this.c=c;this.render();}set hass(h){this.h=h;this.render();}
+ setConfig(c){this.c=c;this.render();}set hass(h){myhomeTheme(this);this.h=h;this.render();}
  connectedCallback(){this.io=new IntersectionObserver(es=>{this.visible=es.some(e=>e.isIntersecting);if(this.visible)this.render();});this.io.observe(this);this.tick=setInterval(()=>{if(this.visible&&!document.hidden)this.render();},60000);}
  disconnectedCallback(){this.io?.disconnect();clearInterval(this.tick);}
  getCardSize(){return this.c?.mode==='timers'?1:2;}getGridOptions(){return{columns:'full',rows:'auto'};}

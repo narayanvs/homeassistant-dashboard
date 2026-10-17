@@ -1,3 +1,4 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 /* Dashboard-scoped typography. No external font downloads or HA state helpers. */
 (()=>{
  const key='myhome.live.font.v1';
@@ -18,7 +19,7 @@
  };
  window.myhomeTypography={fonts,read,choose,addPicker};
  class FontScope extends HTMLElement{
-  setConfig(){this.style.display='none';}set hass(value){}getCardSize(){return 0;}
+  setConfig(){this.style.display='none';}set hass(value){myhomeTheme(this);}getCardSize(){return 0;}
   connectedCallback(){this.style.display='none';this.changed=()=>this.apply();this.storage=e=>{if(e.key===key)this.apply();};window.addEventListener('myhome-font-change',this.changed);window.addEventListener('storage',this.storage);this.apply();}
   apply(){if(!this.view){let e=this;while(e){if(['HUI-VIEW','HUI-SECTIONS-VIEW'].includes(e.tagName)){this.view=e;break;}e=e.parentElement||e.getRootNode()?.host;}}if(!this.view)return;const f=read();const names=['--myhome-font-family','--primary-font-family','--ha-font-family-body','--ha-font-family-heading','--mdc-typography-font-family','--paper-font-common-base_-_font-family','font-family'];if(!this.original)this.original=Object.fromEntries(names.map(n=>[n,this.view.style.getPropertyValue(n)]));for(const n of names)this.view.style.setProperty(n,f.family);this.view.style.fontFamily=f.family;}
   disconnectedCallback(){window.removeEventListener('myhome-font-change',this.changed);window.removeEventListener('storage',this.storage);if(this.view&&this.original){for(const [n,v]of Object.entries(this.original))v?this.view.style.setProperty(n,v):this.view.style.removeProperty(n);}this.view=null;this.original=null;}

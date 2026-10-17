@@ -1,3 +1,4 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 /* MyHome family calendar. Events stay in HA's calendar integrations.
  * Original implementation; inspired by agenda/month navigation in Home Calendar Card.
  * No external libraries, credentials, or event storage in this frontend. */
@@ -19,7 +20,7 @@ class FamilyCalendar extends HTMLElement{
  restorePreferences(){if(this.preferencesLoaded||!this.config)return;this.preferencesLoaded=true;try{const p=JSON.parse(localStorage.getItem(this.preferenceKey())||'null');if(!p)return;if(['day','week','month','agenda'].includes(p.mode))this.mode=p.mode;const ids=new Set(this.calendars().map(c=>c.entity));if(Array.isArray(p.excluded))this.excluded=new Set(p.excluded.filter(id=>ids.has(id)));}catch(_){} }
  savePreferences(){try{localStorage.setItem(this.preferenceKey(),JSON.stringify({mode:this.mode,excluded:[...this.excluded]}));}catch(_){} }
 
- set hass(h){this._hass=h;this.restorePreferences();if(this.config&&(!this.loaded||Date.now()-this.loaded>300000)&&!this.loading)this.load();}
+ set hass(h){myhomeTheme(this);this._hass=h;this.restorePreferences();if(this.config&&(!this.loaded||Date.now()-this.loaded>300000)&&!this.loading)this.load();}
  connectedCallback(){this.loading=false;this.onCalendarChange=()=>this.load();window.addEventListener('myhome-calendar-changed',this.onCalendarChange);this.timer=setInterval(()=>{if(this._hass&&!document.hidden)this.load();},300000);}
  disconnectedCallback(){clearInterval(this.timer);window.removeEventListener('myhome-calendar-changed',this.onCalendarChange);this.generation=(this.generation||0)+1;}
  getCardSize(){return this.config?.summary?3:10;}

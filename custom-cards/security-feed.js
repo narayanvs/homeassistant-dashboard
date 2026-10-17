@@ -1,10 +1,11 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 /* MyHome security: existing Frigate events, authenticated HA transport. */
 (()=>{
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 class SecurityFeed extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this.events=[];this.camera='all';this.hours=24;this.urls=new Map();this.limit=40;this.onVisibility=()=>{if(!document.hidden&&this.feedVisible)this.load()};}
  setConfig(c){this.config=c;this.render();}
- set hass(h){this._hass=h;if(this.isConnected&&this.feedVisible&&!this.started){this.started=true;this.load();}}
+ set hass(h){myhomeTheme(this);this._hass=h;if(this.isConnected&&this.feedVisible&&!this.started){this.started=true;this.load();}}
  connectedCallback(){this.feedObserver=new IntersectionObserver(es=>{this.feedVisible=es.some(e=>e.isIntersecting);if(this.feedVisible&&this._hass){this.started=true;this.load(true);}}, {rootMargin:'120px'});this.feedObserver.observe(this);this.timer=setInterval(()=>{if(!document.hidden&&this.feedVisible)this.load(true)},60000);document.addEventListener('visibilitychange',this.onVisibility);}
  disconnectedCallback(){clearInterval(this.timer);this.feedObserver?.disconnect();document.removeEventListener('visibilitychange',this.onVisibility);this.started=false;this.observer?.disconnect();this.shadowRoot.querySelector('dialog')?.close();}
  getCardSize(){return 10} getGridOptions(){return {columns:12,rows:'auto'}}

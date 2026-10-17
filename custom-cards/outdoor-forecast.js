@@ -1,7 +1,8 @@
+import {myhomeTheme} from './theme-mode.js?rev=20261017-light8';
 class MyHomeOutdoorForecast extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this.at=0;this.rows=[];}
  setConfig(c){this.config=c;this.entity=c.entity||'weather.forecast_home_2';}
- set hass(h){this.h=h;if(this.visible)this.load();}
+ set hass(h){myhomeTheme(this);this.h=h;if(this.visible)this.load();}
  connectedCallback(){this.io=new IntersectionObserver(es=>{this.visible=es[0].isIntersecting;if(this.visible)this.load();},{rootMargin:'100px'});this.io.observe(this);}
  disconnectedCallback(){this.io?.disconnect();}
  async load(){if(!this.h||this.pending||Date.now()-this.at<1800000)return;this.pending=true;this.render();try{const r=await this.h.callWS({type:'call_service',domain:'weather',service:'get_forecasts',service_data:{type:'daily'},target:{entity_id:this.entity},return_response:true});this.rows=(r.response?.[this.entity]?.forecast||[]).slice(0,6);this.error=!this.rows.length?'Forecast unavailable':'';}catch{this.error='Forecast unavailable';}finally{this.at=Date.now();this.pending=false;this.render();}}
